@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootswatch/dist/cyborg/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      App
+    <div className='App'>
+      <h1>App</h1>
     </div>
   );
 }
