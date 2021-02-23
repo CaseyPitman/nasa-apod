@@ -8,6 +8,7 @@ import Apod from './components/Apod';
 //Styles
 import 'bootswatch/dist/cyborg/bootstrap.min.css';
 
+
 function App() {
   return (
     <div className='App'>
@@ -17,7 +18,7 @@ function App() {
             <Home />
           </Route>
 
-          <Route exact path='/apod'>
+          <Route path='/apod'>
             <Apod />
           </Route>
         </Switch>
