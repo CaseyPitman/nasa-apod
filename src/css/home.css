@@ -1,0 +1,9 @@
+/* Styles for the home view */
+
+.home {
+  background-image: url('../images/milky-way.jpg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
