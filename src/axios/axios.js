@@ -3,6 +3,8 @@
 import axios from 'axios';
 
 
-export default axios.create({
-  baseURL: `https://api.nasa.gov/planetary/`,
-});
+const getApod = axios.create({
+  baseURL: `https://api.nasa.gov/planetary/`}
+);
+
+export default getApod;

@@ -1,22 +1,26 @@
 // Displays apod image for
 import React, { useState, useEffect } from 'react';
 
+//Componenets
 import DatePicker from 'react-datepicker';
+import Button from 'react-bootstrap/Button';
+
+//Helper functions
+import getApod from '../axios/axios';
+
+//Styles
 import 'react-datepicker/dist/react-datepicker.css';
 
-//random pic?
+//random pic? button
+//display searched pic
 //display pic and info
-
-
-// TODO: limit datepicker to dates before 1995-06-16 (error handling for response?)
 
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const handleSelectDate = (date) => {
-     console.log(`You selected the date: ${date}`)
-  }
-
+  const handleSelectDate = date => {
+    console.log(`You selected the date: ${date}`);
+  };
 
   return (
     <div className='apod'>
@@ -24,10 +28,10 @@ const Apod = () => {
         selected={startDate}
         maxDate={new Date()}
         onChange={date => setStartDate(date)}
-        minDate={new Date(1995,6,20)}
-        onSelect = {handleSelectDate(startDate)}
+        minDate={new Date(1995, 6, 20)}
+        onSelect={handleSelectDate(startDate)}
       />
-      {/* <h1>APOD</h1>; */}
+      <Button variant='outline-success'>Random Date</Button>
     </div>
   );
 };
