@@ -13,12 +13,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
 
+  const handleSelectDate = (date) => {
+     console.log(`You selected the date: ${date}`)
+  }
+
+
   return (
     <div className='apod'>
       <DatePicker
         selected={startDate}
         maxDate={new Date()}
         onChange={date => setStartDate(date)}
+        minDate={new Date(1995,6,20)}
+        onSelect = {handleSelectDate(startDate)}
       />
       {/* <h1>APOD</h1>; */}
     </div>
