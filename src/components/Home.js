@@ -12,13 +12,19 @@ import '../css/home.css';
 const Home = () => {
   return (
     <div className='home'>
-      <h1>Somewhere, something incredible is waiting to be known.</h1>
-      <h1>- Carl Sagan</h1>
-      <Link to='apod'>
-        <Button variant='outline-info' size='lg'>
-          Blast Off
-        </Button>
-      </Link>
+      <div className='intro-content'>
+        <h1 className='intro-quote font-weight-light'>
+          Somewhere, something incredible is waiting to be known.
+        </h1>
+        <h2 className='intro-quote-attribution font-weight-light font-italic'>
+          - Carl Sagan
+        </h2>
+        <Link to='apod' className='intro-button my-5'>
+          <Button variant='info' size='lg'>
+            Blast Off
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -6,4 +6,43 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+
+  margin: auto;
+  width: 90%;
+}
+
+.intro-quote {
+  font-size: clamp(12px, 8vw, 50px);
+}
+
+.intro-quote-attribution {
+  font-size: clamp(12px, 6vw, 40px);
+  text-align: end;
+  width: 100%;
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) {
+  .intro-content {
+    width: 66%;
+  }
+}
+
+/* Large tablets and laptops */
+
+@media only screen and (min-width: 1024px) {
+  .intro-content {
+    width: 50%;
+  }
 }
