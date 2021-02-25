@@ -11,12 +11,24 @@ import getApod from '../axios/axios';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
 
+// import axios from './axios/axios'
+const apiKey = process.env.REACT_APP_NASA_KEY;
+
 //random pic? button
 //display searched pic
 //display pic and info
 
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await getApod.get(`/apod?api_key=${apiKey}`);
+    console.log(response.data);
+  };
 
   const handleSelectDate = date => {
     console.log(`You selected the date: ${date}`);
