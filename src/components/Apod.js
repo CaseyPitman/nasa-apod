@@ -38,12 +38,16 @@ const Apod = () => {
 
   const handleSelectDate = date => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
-
     console.log(`You selected the date: ${formattedDate}`);
     const query = `&date=${formattedDate}`;
     getData(query);
   };
 
+  const handleRandom = () => {
+    console.log('you want a random pic')
+  }
+
+  
   const displayDate = () => {
     if (!apodData) {
       return 'date goes here';
@@ -65,7 +69,6 @@ const Apod = () => {
   }
 
 
-
   return (
     <div className='apod'>
       <DatePicker
@@ -75,7 +78,8 @@ const Apod = () => {
         minDate={new Date(1995, 6, 20)}
         onSelect={handleSelectDate(startDate)}
       />
-      <Button variant='outline-success'>Random Date</Button>
+      <Button variant='outline-success' onClick = {handleRandom}>Random Date</Button>
+      <Button variant='outline-info'>Search NASA Image Library</Button>
 
       <div>{displayDate()}</div>
       <div>{apodData.title}</div>
