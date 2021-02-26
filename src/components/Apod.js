@@ -21,15 +21,17 @@ const Apod = () => {
   const [apodData, setApodData] = useState({});
   const [imageType, setImageType] = useState('');
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const getData = async query => {
     // TODO: ternary after apiKey for search or random.
-    const response = await getApod.get(`/apod?api_key=${apiKey}`);
-    console.log(response.data);
-    setApodData(response.data);
+
+    // const response = await getApod.get(`/apod?api_key=${apiKey}`);
+    // console.log(response.data);
+    // setApodData(response.data);
+    console.log(`query: ${query}`)
   };
 
   // TODO: ternary to determine between image and video.
@@ -38,10 +40,8 @@ const Apod = () => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
 
     console.log(`You selected the date: ${formattedDate}`);
-
-    // const reformatDate = format(new Date(formattedDate), 'MMMM dd, yyyy');
-    // console.log(reformatDate);
-    // TODO: call for getData w/ search parameters - YYYY-MM-DD
+    const query = `&date=${formattedDate}`;
+    getData(query);
   };
 
   const displayDate = () => {
@@ -53,6 +53,18 @@ const Apod = () => {
   };
 
   // TODO: call for data, random pic.
+  const renderMedia = () => {
+    if (apodData.media_type === 'video'){
+      //render iframe w/ video
+      console.log('video')
+    } else {
+      //render traditional image
+      console.log('image')
+    }
+
+  }
+
+
 
   return (
     <div className='apod'>
