@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 //Helper functions
 import getApod from '../axios/axios';
 import { format } from 'date-fns';
+import dayjs from 'dayjs';
 
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
@@ -47,9 +48,7 @@ const Apod = () => {
     if (!apodData) {
       return 'date goes here';
     }
-
-    const formattedDate = format(new Date(apodData.date), 'MMMM dd, yyyy');
-
+    const formattedDate = dayjs(apodData.date).format('MMM. DD, YYYY');
     return formattedDate;
   };
 
@@ -65,7 +64,7 @@ const Apod = () => {
         onSelect={handleSelectDate(startDate)}
       />
       <Button variant='outline-success'>Random Date</Button>
-    
+
       <div>{displayDate()}</div>
       <div>{apodData.title}</div>
 
