@@ -18,6 +18,8 @@ const apiKey = process.env.REACT_APP_NASA_KEY;
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
+  const [imageType, setImageType] = useState('');
+
   useEffect(() => {
     getData();
   }, []);
@@ -32,11 +34,23 @@ const Apod = () => {
   // TODO: ternary to determine between image and video.
 
   const handleSelectDate = date => {
-     const formattedDate = format(new Date(date), 'yyyy-MM-dd')
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
 
     console.log(`You selected the date: ${formattedDate}`);
 
+    // const reformatDate = format(new Date(formattedDate), 'MMMM dd, yyyy');
+    // console.log(reformatDate);
     // TODO: call for getData w/ search parameters - YYYY-MM-DD
+  };
+
+  const displayDate = () => {
+    if (!apodData) {
+      return 'date goes here';
+    }
+
+    const formattedDate = format(new Date(apodData.date), 'MMMM dd, yyyy');
+
+    return formattedDate;
   };
 
   // TODO: call for data, random pic.
@@ -49,10 +63,10 @@ const Apod = () => {
         onChange={date => setStartDate(date)}
         minDate={new Date(1995, 6, 20)}
         onSelect={handleSelectDate(startDate)}
-    
       />
       <Button variant='outline-success'>Random Date</Button>
-      <div>{format(new Date(apodData.date), 'MMMM dd, yyyy')}</div>
+    
+      <div>{displayDate()}</div>
       <div>{apodData.title}</div>
 
       <div>
