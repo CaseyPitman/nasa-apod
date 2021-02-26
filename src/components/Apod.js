@@ -21,17 +21,30 @@ const Apod = () => {
   const [apodData, setApodData] = useState({});
   const [imageType, setImageType] = useState('');
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    const retrieve = async () => {
+      const searchDate = await format(new Date(startDate), 'yyyy-MM-dd');
+      const query = `&date=${searchDate}`
+      console.log(`effect query: ${query}`);
+   
+      getData(query);
+    };
+    retrieve()
+  }, [startDate]);
 
   const getData = async query => {
     // TODO: ternary after apiKey for search or random.
+    if (!query) {
+      query = '';
+    }
+    try {
+      const response = await getApod.get(`/apod?api_key=${apiKey}${query}`);
+      console.log(response.data);
+      await setApodData(response.data);
 
-    // const response = await getApod.get(`/apod?api_key=${apiKey}`);
-    // console.log(response.data);
-    // setApodData(response.data);
-    console.log(`query: ${query}`)
+    } catch (err) {
+      console.log(`error: ${err}`);
+    }
   };
 
   // TODO: ternary to determine between image and video.
@@ -44,10 +57,12 @@ const Apod = () => {
   };
 
   const handleRandom = () => {
-    console.log('you want a random pic')
-  }
+    console.log('you want a random pic');
+    //TODO: query will contain count = 1
+    const query = `&count=1`;
+    getData(query);
+  };
 
-  
   const displayDate = () => {
     if (!apodData) {
       return 'date goes here';
@@ -58,16 +73,19 @@ const Apod = () => {
 
   // TODO: call for data, random pic.
   const renderMedia = () => {
-    if (apodData.media_type === 'video'){
+    if (!apodData) {
+      return <div></div>;
+    } else if (apodData.media_type === 'video') {
       //render iframe w/ video
-      console.log('video')
+
+      console.log('video');
+      return <div>viddy here</div>
     } else {
       //render traditional image
-      console.log('image')
+      console.log('image');
+      return <img src={apodData.url} alt={apodData.title} />;
     }
-
-  }
-
+  };
 
   return (
     <div className='apod'>
@@ -76,17 +94,17 @@ const Apod = () => {
         maxDate={new Date()}
         onChange={date => setStartDate(date)}
         minDate={new Date(1995, 6, 20)}
-        onSelect={handleSelectDate(startDate)}
+        // onSelect={handleSelectDate(startDate)}
       />
-      <Button variant='outline-success' onClick = {handleRandom}>Random Date</Button>
-      <Button variant='outline-info'>Search NASA Image Library</Button>
+      <Button variant='outline-success'onClick={handleRandom}>Random Date</Button>
+      <Button variant='outline-info' >
+        Search NASA Image Library
+      </Button>
 
       <div>{displayDate()}</div>
       <div>{apodData.title}</div>
 
-      <div>
-        <img src={apodData.url} alt={apodData.title} />
-      </div>
+      <div>{renderMedia()}</div>
       <div>{apodData.explanation}</div>
     </div>
   );
