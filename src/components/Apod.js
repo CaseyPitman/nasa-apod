@@ -6,57 +6,24 @@ import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 
 //Helper functions
-import getApod from '../axios/axios';
+import getData from '../axios/getData';
 import { format } from 'date-fns';
 import dayjs from 'dayjs';
 
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
 
-// import axios from './axios/axios'
-const apiKey = process.env.REACT_APP_NASA_KEY;
 
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
 
   useEffect(() => {
-    //   const retrieve = async () => {
-    //     const searchDate = await format(new Date(startDate), 'yyyy-MM-dd');
-    //     const query = `&date=${searchDate}`;
-    //     console.log(`effect query: ${query}`);
 
-    //     getData(query);
-    //   };
-    //   retrieve();
     getData();
   }, []);
 
-  const getData = async (query, type = 'date') => {
-    // TODO: ternary after apiKey for search or random.
-    if (!query) {
-      query = '';
-    }
-    try {
-      const response = await getApod.get(`/apod?api_key=${apiKey}${query}`);
-      console.log(response.data);
-
-      type === 'random'
-        ? setApodData(response.data[0])
-        : setApodData(response.data);
-
-      // if (type === 'random') {
-      //   console.log(response.data[0]);
-      //   setApodData(response.data[0]);
-      // }
-      // // console.log(data)
-      // else {
-      //   setApodData(response.data);
-      // }
-    } catch (err) {
-      console.log(`error: ${err}`);
-    }
-  };
+  
 
   // TODO: ternary to determine between image and video.
 
