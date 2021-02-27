@@ -26,8 +26,6 @@ const Apod = () => {
     fetch();
   }, []);
 
-  // TODO: ternary to determine between image and video.
-
   const handleSelectDate = async date => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     console.log(`You selected the date: ${formattedDate}`);
@@ -88,12 +86,6 @@ const Apod = () => {
     }
   };
 
-  /* 
-Try this:  
-Move getData to helper func. in the component
-have event funcs for selecting a date -onSelect (and this should call by default on first load, but maybe not, in which case go with useEffect) and random. In those event funcs do all the prep. format any dates for the call and assemble a params object. Pass that to the getData helper func. save the return to a variable and then manipulate it as needed - format, set the new startDate to properly fill in the serch field, whatever - before setting it as the apodData state. This should trigger the render. In theory. I hope. 
-*/
-
   return (
     <div className='apod'>
       <DatePicker
@@ -105,8 +97,9 @@ have event funcs for selecting a date -onSelect (and this should call by default
       />
 
       <Button variant='outline-success' onClick={handleRandom}>
-        Random Date
+        Random Pic
       </Button>
+      <Button variant='outline-warning'>Today's Pic </Button>
       <Button variant='outline-info'>Search NASA Image Library</Button>
 
       <div>{displayDate()}</div>
