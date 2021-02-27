@@ -20,7 +20,6 @@ const Apod = () => {
   useEffect(() => {
     const fetch = async () => {
       const result = await getData();
-      console.log(result);
       setApodData(result);
     };
     fetch();
@@ -28,9 +27,6 @@ const Apod = () => {
 
   const handleSelectDate = async date => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
-    console.log(`You selected the date: ${formattedDate}`);
-    // const query = `&date=${formattedDate}`;
-    // getData(query, 'date');
     const queryDate = {
       params: {
         date: formattedDate,
@@ -43,8 +39,6 @@ const Apod = () => {
   };
 
   const handleRandom = async () => {
-    console.log('you want a random pic');
-
     const queryRandom = {
       params: {
         count: 1,
@@ -54,6 +48,13 @@ const Apod = () => {
 
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
+  };
+
+  const handleToday = async () => {
+    console.log('go back to today');
+    const result = await getData();
+    setStartDate(new Date());
+    setApodData(result);
   };
 
   const displayDate = () => {
@@ -99,7 +100,9 @@ const Apod = () => {
       <Button variant='outline-success' onClick={handleRandom}>
         Random Pic
       </Button>
-      <Button variant='outline-warning'>Today's Pic </Button>
+      <Button variant='outline-warning' onClick={handleToday}>
+        Today's Pic{' '}
+      </Button>
       <Button variant='outline-info'>Search NASA Image Library</Button>
 
       <div>{displayDate()}</div>
