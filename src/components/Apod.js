@@ -20,7 +20,7 @@ const Apod = () => {
   useEffect(() => {
     const fetch = async () => {
       const result = await getData();
-      console.log(result)
+      console.log(result);
       setApodData(result);
     };
     fetch();
@@ -28,11 +28,21 @@ const Apod = () => {
 
   // TODO: ternary to determine between image and video.
 
-  const handleSelectDate = date => {
+  const handleSelectDate = async date => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     console.log(`You selected the date: ${formattedDate}`);
     // const query = `&date=${formattedDate}`;
     // getData(query, 'date');
+    const queryDate = {
+      params: {
+        date: formattedDate,
+        thumbs: true,
+      },
+    };
+    const result = await getData(queryDate);
+    console.log(result);
+
+    setApodData(result);
   };
 
   const handleRandom = () => {
@@ -57,25 +67,18 @@ const Apod = () => {
       //render iframe w/ video
 
       console.log('video');
-      return <div>viddy here</div>;
+      return (
+        <iframe
+          src={apodData.url}
+          title={apodData.title}
+          allowFullScreen={true}
+          border='1px solid white'
+        />
+      );
     } else {
       //render traditional image
       console.log('image');
       return <img src={apodData.url} alt={apodData.title} />;
-    }
-  };
-
-  const renderApod = () => {
-    if (!apodData) {
-      return <div></div>;
-    } else {
-      return (
-        <div>
-          <div>{apodData.title}</div>
-          <div>{renderMedia()}</div>
-          <div>{apodData.explanation}</div>
-        </div>
-      );
     }
   };
 
@@ -92,7 +95,7 @@ have event funcs for selecting a date -onSelect (and this should call by default
         maxDate={new Date()}
         onChange={date => setStartDate(date)}
         minDate={new Date(1995, 6, 20)}
-        onSelect={() => handleSelectDate(startDate)}
+        onSelect={date => handleSelectDate(date)}
       />
 
       <Button variant='outline-success' onClick={handleRandom}>
@@ -101,7 +104,9 @@ have event funcs for selecting a date -onSelect (and this should call by default
       <Button variant='outline-info'>Search NASA Image Library</Button>
 
       <div>{displayDate()}</div>
-      <div>{renderApod()}</div>
+      <div>{apodData.title}</div>
+      <div>{renderMedia()}</div>
+      <div>{apodData.explanation}</div>
     </div>
   );
 };
