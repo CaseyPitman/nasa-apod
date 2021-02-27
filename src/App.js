@@ -17,7 +17,7 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/apod'>
+          <Route path={`/apod/:date`}>
             <Apod />
           </Route>
           <Route path='/search'>

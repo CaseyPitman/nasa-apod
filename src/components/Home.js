@@ -19,7 +19,7 @@ const Home = () => {
         <h2 className='intro-quote-attribution font-weight-light font-italic'>
           - Carl Sagan
         </h2>
-        <Link to='apod' className='intro-button my-5'>
+        <Link to={`apod/${`today`}`} className='intro-button my-5'>
           <Button variant='info' size='lg'>
             Blast Off
           </Button>
