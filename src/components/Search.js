@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+//Helper functions
+import fetchSearch from '../axios/fetchSearch';
+
 //Components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,10 +13,20 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchPage, setSearchPage] = useState(`1`);
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log(`submit: ${searchTerm}`);
+    const query = {
+      params: {
+        q: searchTerm,
+        media_type: 'image',
+        page: searchPage,
+      },
+    };
+
+    fetchSearch(query);
   };
 
   return (
