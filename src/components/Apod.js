@@ -36,7 +36,6 @@ const Apod = () => {
     const queryDate = {
       params: {
         date: formattedDate,
-        thumbs: true,
       },
     };
     const result = await getData(queryDate);
@@ -45,11 +44,18 @@ const Apod = () => {
     setApodData(result);
   };
 
-  const handleRandom = () => {
+  const handleRandom = async () => {
     console.log('you want a random pic');
-    //TODO: query will contain count = 1
-    // const query = `&count=1`;
-    // getData(query, 'random');
+
+    const queryRandom = {
+      params: {
+        count: 1,
+      },
+    };
+    const result = await getData(queryRandom);
+
+    setStartDate(new Date(result[0].date));
+    setApodData(result[0]);
   };
 
   const displayDate = () => {
