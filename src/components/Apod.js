@@ -21,6 +21,7 @@ const Apod = () => {
     const fetch = async () => {
       const result = await getData();
       setApodData(result);
+      setStartDate(new Date());
     };
     fetch();
   }, []);
@@ -33,7 +34,6 @@ const Apod = () => {
       },
     };
     const result = await getData(queryDate);
-    console.log(result);
 
     setApodData(result);
   };
@@ -68,9 +68,6 @@ const Apod = () => {
     if (!apodData) {
       return <div></div>;
     } else if (apodData.media_type === 'video') {
-      //render iframe w/ video
-
-      console.log('video');
       return (
         <iframe
           src={apodData.url}
@@ -80,8 +77,7 @@ const Apod = () => {
         />
       );
     } else {
-      //render traditional image
-      console.log('image');
+      //render image
       return <img src={apodData.url} alt={apodData.title} />;
     }
   };
@@ -100,10 +96,10 @@ const Apod = () => {
       </div>
 
       <Button variant='outline-success' onClick={handleRandom}>
-        Random Pic
+        Random Picture
       </Button>
       <Button variant='outline-warning' onClick={handleToday}>
-        Today's Pic{' '}
+        Today's Picture
       </Button>
       <Button variant='outline-info'>Search NASA Image Library</Button>
 

@@ -6,6 +6,7 @@ const getData = async (query = {}) => {
     const response = await getApod.get(`/apod?api_key=${apiKey}`, query);
     return response.data;
   } catch (err) {
+    //TODO: add error handling
     console.log(`error: ${err}`);
   }
 };
