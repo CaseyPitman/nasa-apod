@@ -14,6 +14,8 @@ import dayjs from 'dayjs';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
 
+//TODO: update url based on date. 
+
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});

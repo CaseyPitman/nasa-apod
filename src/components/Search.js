@@ -30,6 +30,10 @@ const Search = () => {
     setSearchResults(result);
   };
 
+  //TODO: map searchResults and return grid w/thumbnails. Expand into modal?
+  //TODO: add pagination controls 
+
+  
   return (
     <div>
       <h1>Search Page</h1>
