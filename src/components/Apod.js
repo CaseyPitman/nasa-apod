@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 
 //Helper functions
-import getData from '../axios/getData';
+import fetchApod from '../axios/fetchApod';
 import { format } from 'date-fns';
 import dayjs from 'dayjs';
 
@@ -20,7 +20,7 @@ const Apod = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const result = await getData();
+      const result = await fetchApod();
       setApodData(result);
       setStartDate(new Date());
     };
@@ -34,7 +34,7 @@ const Apod = () => {
         date: formattedDate,
       },
     };
-    const result = await getData(queryDate);
+    const result = await fetchApod(queryDate);
 
     setApodData(result);
   };
@@ -45,14 +45,14 @@ const Apod = () => {
         count: 1,
       },
     };
-    const result = await getData(queryRandom);
+    const result = await fetchApod(queryRandom);
 
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
   };
 
   const handleToday = async () => {
-    const result = await getData();
+    const result = await fetchApod();
     setStartDate(new Date());
     setApodData(result);
   };
