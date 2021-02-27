@@ -51,7 +51,6 @@ const Apod = () => {
   };
 
   const handleToday = async () => {
-    console.log('go back to today');
     const result = await getData();
     setStartDate(new Date());
     setApodData(result);
@@ -89,13 +88,16 @@ const Apod = () => {
 
   return (
     <div className='apod'>
-      <DatePicker
-        selected={startDate}
-        maxDate={new Date()}
-        onChange={date => setStartDate(date)}
-        minDate={new Date(1995, 6, 20)}
-        onSelect={date => handleSelectDate(date)}
-      />
+      <h1>NASA Astronomy Picture of the Day</h1>
+      <div>
+        <DatePicker
+          selected={startDate}
+          maxDate={new Date()}
+          onChange={date => setStartDate(date)}
+          minDate={new Date(1995, 6, 20)}
+          onSelect={date => handleSelectDate(date)}
+        />
+      </div>
 
       <Button variant='outline-success' onClick={handleRandom}>
         Random Pic
