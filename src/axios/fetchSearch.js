@@ -8,8 +8,7 @@ const fetchSearch = async (query = {}) => {
       `https://images-api.nasa.gov/search`,
       query
     );
-    console.log(response.data.collection);
-    return response;
+    return response.data.collection.items;
   } catch (err) {
     //TODO: add error handling
     console.log(err);

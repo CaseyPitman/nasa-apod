@@ -14,8 +14,9 @@ import InputGroup from 'react-bootstrap/InputGroup';
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(`1`);
+  const [searchResults, setSearchResults] = useState([])
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     console.log(`submit: ${searchTerm}`);
     const query = {
@@ -25,8 +26,8 @@ const Search = () => {
         page: searchPage,
       },
     };
-
-    fetchSearch(query);
+    const result = await fetchSearch(query);
+    setSearchResults(result);
   };
 
   return (
@@ -51,6 +52,7 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      <div className = 'search-results'></div>
     </div>
   );
 };
