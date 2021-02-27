@@ -19,20 +19,20 @@ const apiKey = process.env.REACT_APP_NASA_KEY;
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
-  const [imageType, setImageType] = useState('');
 
   useEffect(() => {
-    const retrieve = async () => {
-      const searchDate = await format(new Date(startDate), 'yyyy-MM-dd');
-      const query = `&date=${searchDate}`
-      console.log(`effect query: ${query}`);
-   
-      getData(query);
-    };
-    retrieve()
-  }, [startDate]);
+    //   const retrieve = async () => {
+    //     const searchDate = await format(new Date(startDate), 'yyyy-MM-dd');
+    //     const query = `&date=${searchDate}`;
+    //     console.log(`effect query: ${query}`);
 
-  const getData = async query => {
+    //     getData(query);
+    //   };
+    //   retrieve();
+    getData();
+  }, []);
+
+  const getData = async (query, type = 'date') => {
     // TODO: ternary after apiKey for search or random.
     if (!query) {
       query = '';
@@ -40,8 +40,19 @@ const Apod = () => {
     try {
       const response = await getApod.get(`/apod?api_key=${apiKey}${query}`);
       console.log(response.data);
-      await setApodData(response.data);
 
+      type === 'random'
+        ? setApodData(response.data[0])
+        : setApodData(response.data);
+
+      // if (type === 'random') {
+      //   console.log(response.data[0]);
+      //   setApodData(response.data[0]);
+      // }
+      // // console.log(data)
+      // else {
+      //   setApodData(response.data);
+      // }
     } catch (err) {
       console.log(`error: ${err}`);
     }
@@ -53,14 +64,14 @@ const Apod = () => {
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     console.log(`You selected the date: ${formattedDate}`);
     const query = `&date=${formattedDate}`;
-    getData(query);
+    getData(query, 'date');
   };
 
   const handleRandom = () => {
     console.log('you want a random pic');
     //TODO: query will contain count = 1
     const query = `&count=1`;
-    getData(query);
+    getData(query, 'random');
   };
 
   const displayDate = () => {
@@ -79,13 +90,21 @@ const Apod = () => {
       //render iframe w/ video
 
       console.log('video');
-      return <div>viddy here</div>
+      return <div>viddy here</div>;
     } else {
       //render traditional image
       console.log('image');
       return <img src={apodData.url} alt={apodData.title} />;
     }
   };
+
+/* 
+Try this:  
+Move getData to helper func. in the component
+have event funcs for selecting a date -onSelect (and this should call by default on first load, but maybe not, in which case go with useEffect) and random. In those event funcs do all the prep. format any dates for the call and assemble a params object. Pass that to the getData helper func. save the return to a variable and then manipulate it as needed - format, set the new startDate to properly fill in the serch field, whatever - before setting it as the apodData state. This should trigger the render. In theory. I hope. 
+*/
+
+
 
   return (
     <div className='apod'>
@@ -94,12 +113,13 @@ const Apod = () => {
         maxDate={new Date()}
         onChange={date => setStartDate(date)}
         minDate={new Date(1995, 6, 20)}
-        // onSelect={handleSelectDate(startDate)}
+        onSelect={() => handleSelectDate(startDate)}
       />
-      <Button variant='outline-success'onClick={handleRandom}>Random Date</Button>
-      <Button variant='outline-info' >
-        Search NASA Image Library
+
+      <Button variant='outline-success' onClick={handleRandom}>
+        Random Date
       </Button>
+      <Button variant='outline-info'>Search NASA Image Library</Button>
 
       <div>{displayDate()}</div>
       <div>{apodData.title}</div>
