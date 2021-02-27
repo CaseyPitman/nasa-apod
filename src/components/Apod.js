@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 //Componenets
+import { Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 
@@ -101,8 +102,9 @@ const Apod = () => {
       <Button variant='outline-warning' onClick={handleToday}>
         Today's Picture
       </Button>
-      <Button variant='outline-info'>Search NASA Image Library</Button>
-
+      <Link to='/search'>
+        <Button variant='outline-info'>Search NASA Image Library</Button>
+      </Link>
       <div>{displayDate()}</div>
       <div>{apodData.title}</div>
       <div>{renderMedia()}</div>
