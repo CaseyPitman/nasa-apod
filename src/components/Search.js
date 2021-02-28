@@ -14,7 +14,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(`1`);
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -31,13 +31,12 @@ const Search = () => {
   };
 
   //TODO: map searchResults and return grid w/thumbnails. Expand into modal?
-  //TODO: add pagination controls 
+  //TODO: add pagination controls
 
-  
   return (
     <div>
       <h1>Search Page</h1>
-      <Link to='/apod'>
+      <Link to='/apod/today'>
         <Button variant='outline-info'>Back to Picture of the Day</Button>
       </Link>
       <Form onSubmit={handleSubmit}>
@@ -56,7 +55,7 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <div className = 'search-results'></div>
+      <div className='search-results'></div>
     </div>
   );
 };

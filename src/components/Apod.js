@@ -37,7 +37,7 @@ const Apod = () => {
       },
     };
     const result = await fetchApod(queryDate);
-
+       //TODO: push to apod/date/${date}
     setApodData(result);
   };
 
@@ -49,6 +49,7 @@ const Apod = () => {
     };
     const result = await fetchApod(queryRandom);
 
+       //TODO: push to apod/date/${date}
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
   };
@@ -56,6 +57,7 @@ const Apod = () => {
   const handleToday = async () => {
     const result = await fetchApod();
     setStartDate(new Date());
+       //TODO: push to apod/today
     setApodData(result);
   };
 
