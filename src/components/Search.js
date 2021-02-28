@@ -33,11 +33,14 @@ const Search = () => {
   };
 
   //TODO: add pagination controls
-  //TODO: add modal view of full size image w/ title, description and photgrapher if available. 
+  //TODO: add modal view of full size image w/ title, description and photgrapher if available.
 
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
+    }
+    if (!searchResults.links) {
+      return <div>No result</div>;
     }
     const thumbnails = searchResults.items.map(image => {
       return (
@@ -60,7 +63,7 @@ const Search = () => {
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <Form.Control
-            placeholder='Saturn'
+            placeholder='Search the NASA image archives'
             aria-label='Search Term'
             aria-describedby='basic-addon2'
             value={searchTerm}
