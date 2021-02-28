@@ -27,11 +27,27 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
+    console.log(result);
     setSearchResults(result);
   };
 
-  //TODO: map searchResults and return grid w/thumbnails. Expand into modal?
   //TODO: add pagination controls
+
+  const renderResults = () => {
+    if (searchResults.length === 0) {
+      return <div></div>;
+    }
+    const thumbnails = searchResults.items.map(image => {
+      return (
+        <div key={image.data[0].nasa_id}>
+          <img src={image.links[0].href} alt={image.data[0].title} />;
+          <p>{image.data[0].title}</p>
+        </div>
+      );
+    });
+
+    return thumbnails;
+  };
 
   return (
     <div>
@@ -55,7 +71,7 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <div className='search-results'></div>
+      <div className='search-results'>{renderResults()}</div>
     </div>
   );
 };
