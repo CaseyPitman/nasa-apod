@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 //Componenets
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 
@@ -14,11 +14,13 @@ import dayjs from 'dayjs';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
 
-//TODO: update url based on date. 
+//TODO: update url based on date.
 
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
+
+  const history = useHistory();
 
   useEffect(() => {
     const fetch = async () => {
@@ -37,7 +39,7 @@ const Apod = () => {
       },
     };
     const result = await fetchApod(queryDate);
-       //TODO: push to apod/date/${date}
+    history.push(`/apod/${formattedDate}`);
     setApodData(result);
   };
 
@@ -49,7 +51,7 @@ const Apod = () => {
     };
     const result = await fetchApod(queryRandom);
 
-       //TODO: push to apod/date/${date}
+    //TODO: push to apod/date/${date}
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
   };
@@ -57,7 +59,7 @@ const Apod = () => {
   const handleToday = async () => {
     const result = await fetchApod();
     setStartDate(new Date());
-       //TODO: push to apod/today
+    //TODO: push to apod/today
     setApodData(result);
   };
 
