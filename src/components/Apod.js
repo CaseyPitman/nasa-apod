@@ -50,8 +50,9 @@ const Apod = () => {
       },
     };
     const result = await fetchApod(queryRandom);
+    const formattedDate = format(new Date(result[0].date), 'yyyy-MM-dd');
 
-    //TODO: push to apod/date/${date}
+    history.push(`/apod/${formattedDate}`);
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
   };
@@ -59,7 +60,7 @@ const Apod = () => {
   const handleToday = async () => {
     const result = await fetchApod();
     setStartDate(new Date());
-    //TODO: push to apod/today
+    history.push(`/apod/today`);
     setApodData(result);
   };
 
