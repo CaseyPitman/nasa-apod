@@ -13,6 +13,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+//styles
+import "../css/search.css"
+
 Modal.setAppElement(`#root`);
 
 const Search = () => {
@@ -20,7 +23,7 @@ const Search = () => {
   const [searchPage, setSearchPage] = useState(`1`);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentImage, setCurrentImage] = {};
+  const [currentImage, setCurrentImage] = useState({});
 
   const history = useHistory();
 
@@ -35,8 +38,6 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
-
-    //TODO: push url to update to search/{search term with plus sign in white spaces (replace w/regex)}/page=1(or whatever number).
 
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
@@ -73,6 +74,17 @@ const Search = () => {
     setModalIsOpen(false);
   };
 
+  const renderModalContent = () => {
+    return (
+      <div>
+        <p>image</p>
+        <h2 className='text-dark'>Title</h2>
+        <p>photographer</p>
+        <p>explanation</p>
+      </div>
+    );
+  };
+
   return (
     <div>
       <h1>Search Page</h1>
@@ -96,8 +108,11 @@ const Search = () => {
         </InputGroup>
       </Form>
       <div className='search-results'>{renderResults()}</div>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <div>Modal content here. </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        preventScroll={false}>
+        <div>{renderModalContent()}</div>
       </Modal>
     </div>
   );
