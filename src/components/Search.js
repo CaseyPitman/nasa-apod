@@ -81,12 +81,15 @@ const Search = () => {
   };
 
   const renderModalContent = () => {
-    console.log(currentImage);
+    // No data present yet, render empty div.
     if (!currentImage.data) {
       return <div></div>;
     }
     return (
       <div>
+        <Button size='sm' variant='outline-danger'>
+          Close
+        </Button>
         <img
           src={currentImage.links[0].href}
           alt={currentImage.data[0].title}
