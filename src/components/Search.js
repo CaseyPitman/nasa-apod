@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 
 //Helper functions
@@ -20,6 +20,9 @@ const Search = () => {
   const [searchPage, setSearchPage] = useState(`1`);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = {};
+
+  const history = useHistory();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -32,8 +35,10 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
-    console.log(result);
+
     //TODO: push url to update to search/{search term with plus sign in white spaces (replace w/regex)}/page=1(or whatever number).
+
+    history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
   };
 
@@ -91,11 +96,8 @@ const Search = () => {
         </InputGroup>
       </Form>
       <div className='search-results'>{renderResults()}</div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        >
-      <div>Modal content here. </div>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <div>Modal content here. </div>
       </Modal>
     </div>
   );
