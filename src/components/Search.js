@@ -28,10 +28,12 @@ const Search = () => {
     };
     const result = await fetchSearch(query);
     console.log(result);
+    //TODO: push url to update to search/{search term with plus sign in white spaces (replace w/regex)}/page=1(or whatever number).
     setSearchResults(result);
   };
 
   //TODO: add pagination controls
+  //TODO: add modal view of full size image w/ title, description and photgrapher if available. 
 
   const renderResults = () => {
     if (searchResults.length === 0) {
