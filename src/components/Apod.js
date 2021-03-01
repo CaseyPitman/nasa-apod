@@ -78,56 +78,62 @@ const Apod = () => {
       return <div></div>;
     } else if (apodData.media_type === 'video') {
       return (
-        <iframe
-          src={apodData.url}
-          title={apodData.title}
-          allowFullScreen={true}
-          border='1px solid white'
-        />
+        <div className='embed-responsive embed-responsive-16by9'>
+          <iframe
+            src={apodData.url}
+            title={apodData.title}
+            allowFullScreen={true}
+            border='1px solid white'
+            className='media-video embed-responsive-item'
+          />
+        </div>
       );
     } else {
       //render image
-      return <img src={apodData.url} alt={apodData.title} />;
+      return (
+        <img src={apodData.url} alt={apodData.title} className='media-image' />
+      );
     }
   };
+
+  // TODO: loading spinner for images.
 
   return (
     <div className='apod'>
       <h1>NASA Astronomy Picture of the Day</h1>
       <div className='apod-actions-container'>
-        <div className='apod-actions-container-left'>
-          <div className='apod-date-picker-container'>
-            <label for='datePicker'>Search a Date</label>
-            <br></br>
-            <DatePicker
-              selected={startDate}
-              maxDate={new Date()}
-              onChange={date => setStartDate(date)}
-              minDate={new Date(1995, 6, 20)}
-              onSelect={date => handleSelectDate(date)}
-              name={`datePicker`}
-            />
-          </div>
-
-          <Button variant='outline-success' onClick={handleRandom}>
-            Random Picture
-          </Button>
-          <Button variant='outline-warning' onClick={handleToday}>
-            Today's Picture
-          </Button>
+        <div className='apod-date-picker-container'>
+          <label htmlFor='datePicker'>Search a Date</label>
+          <br></br>
+          <DatePicker
+            selected={startDate}
+            maxDate={new Date()}
+            onChange={date => setStartDate(date)}
+            minDate={new Date(1995, 6, 20)}
+            onSelect={date => handleSelectDate(date)}
+            name={`datePicker`}
+          />
         </div>
-        <Link to='/search'>
+        <Button variant='outline-success' onClick={handleRandom}>
+          Random Picture
+        </Button>
+        <Button variant='outline-warning' onClick={handleToday}>
+          Today's Picture
+        </Button>{' '}
+        <Link to='/search' className='search-button'>
           <Button variant='outline-info'>Search NASA Image Library</Button>
         </Link>
       </div>
 
-      <div className='apod-content-container'>
-        <div className='apod-media-container'>
-          <p className='apod-display-media'>{renderMedia()}</p>
-        </div>
+      <div className='apod-content-container my-5'>
+        <div className='apod-media-container'>{renderMedia()}</div>
         <div className='apod-display-text-container'>
-          <p className='apod-display-date'>{displayDate()}</p>
-          <p className='apod-display-title'>{apodData.title}</p>
+          <p className='apod-display-date'>
+            <strong>{displayDate()}</strong>
+          </p>
+          <p className='apod-display-title'>
+            <strong>{apodData.title}</strong>
+          </p>
           <p className='apod-display-explanation'>{apodData.explanation}</p>
         </div>
       </div>

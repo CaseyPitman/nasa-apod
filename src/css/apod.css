@@ -13,8 +13,44 @@
   justify-content: space-between;
   align-items: flex-end;
 
-
+  width: 50%;
 }
 
-.apod-action-button-container {
+.apod-media-container {
+  position: relative;
+  width: 50%;
+}
+
+.apod-content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.apod-media-container {
+  border: 1px solid white;
+}
+
+.media-image {
+  border: solid 1px white;
+  display: inline-block;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.apod-display-text-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 50%;
+}
+
+.apod-display-date,
+.apod-display-title {
+  font-size: 20px;
+}
+
+.apod-display-explanation {
+  font-size: 16px;
+  text-align: justify;
 }
