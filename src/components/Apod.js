@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
+import '../css/apod.css';
 
 //TODO: update url based on date.
 
@@ -93,29 +94,43 @@ const Apod = () => {
   return (
     <div className='apod'>
       <h1>NASA Astronomy Picture of the Day</h1>
-      <div>
-        <DatePicker
-          selected={startDate}
-          maxDate={new Date()}
-          onChange={date => setStartDate(date)}
-          minDate={new Date(1995, 6, 20)}
-          onSelect={date => handleSelectDate(date)}
-        />
+      <div className='apod-actions-container'>
+        <div className='apod-actions-container-left'>
+          <div className='apod-date-picker-container'>
+            <label for='datePicker'>Search a Date</label>
+            <br></br>
+            <DatePicker
+              selected={startDate}
+              maxDate={new Date()}
+              onChange={date => setStartDate(date)}
+              minDate={new Date(1995, 6, 20)}
+              onSelect={date => handleSelectDate(date)}
+              name={`datePicker`}
+            />
+          </div>
+
+          <Button variant='outline-success' onClick={handleRandom}>
+            Random Picture
+          </Button>
+          <Button variant='outline-warning' onClick={handleToday}>
+            Today's Picture
+          </Button>
+        </div>
+        <Link to='/search'>
+          <Button variant='outline-info'>Search NASA Image Library</Button>
+        </Link>
       </div>
 
-      <Button variant='outline-success' onClick={handleRandom}>
-        Random Picture
-      </Button>
-      <Button variant='outline-warning' onClick={handleToday}>
-        Today's Picture
-      </Button>
-      <Link to='/search'>
-        <Button variant='outline-info'>Search NASA Image Library</Button>
-      </Link>
-      <div>{displayDate()}</div>
-      <div>{apodData.title}</div>
-      <div>{renderMedia()}</div>
-      <div>{apodData.explanation}</div>
+      <div className='apod-content-container'>
+        <div className='apod-media-container'>
+          <p className='apod-display-media'>{renderMedia()}</p>
+        </div>
+        <div className='apod-display-text-container'>
+          <p className='apod-display-date'>{displayDate()}</p>
+          <p className='apod-display-title'>{apodData.title}</p>
+          <p className='apod-display-explanation'>{apodData.explanation}</p>
+        </div>
+      </div>
     </div>
   );
 };

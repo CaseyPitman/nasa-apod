@@ -1,0 +1,20 @@
+/* Styles for the APOD viewer */
+
+.apod {
+  margin: auto;
+  width: 95%;
+}
+
+.apod-date-picker-container {
+  display: inline-block;
+}
+.apod-actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+
+}
+
+.apod-action-button-container {
+}

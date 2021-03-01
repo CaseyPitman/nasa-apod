@@ -87,9 +87,10 @@ const Search = () => {
     }
     return (
       <div>
-        <Button size='sm' variant='outline-danger'>
+        <Button size='sm' variant='outline-danger' onClick={closeModal}>
           Close
         </Button>
+
         <img
           src={currentImage.links[0].href}
           alt={currentImage.data[0].title}
