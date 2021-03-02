@@ -10,16 +10,25 @@
 }
 .apod-actions-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
-
-  width: 50%;
+  flex-flow: row wrap;
+  width: 100%;
 }
+
+.apod-date-picker-container,
+.random-pic-btn,
+.today-pic-btn {
+  margin-right: 20px;
+}
+
 .apod-content-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-flow: row wrap;
+
+  margin: 20px auto;
 }
 
 .apod-media-container {
@@ -54,10 +63,6 @@
 /* Large Tablet Portrait */
 
 @media only screen and (max-width: 1024px) {
-  .apod-actions-container {
-    width: 70%;
-  }
-
   .apod-media-container {
     width: 100%;
   }
@@ -70,12 +75,41 @@
   }
 }
 
-/* Tablet Portrat */
-
-@media only screen and (max-width: 768px){
-  .apod-actions-container {
-    justify-content: space-between;
-    width:100%;
+@media only screen and (max-width: 767px) {
+ 
+  .apod{
+    width:90%;
   }
 
+  .apod-date-picker-container,
+  .random-pic-btn,
+  .search-btn,.today-pic-btn {
+    margin: 0px;
+    width: 100%;
+  }
+
+  .date-picker{
+    margin:auto;
+  }
+  .apod-date-picker-container {
+   
+    order: 3;
+ 
+  }
+
+  .today-pic-btn {
+
+    order: 4;
+ 
+  }
+
+  .random-pic-btn {
+    order: 5;
+  }
+
+  .today-pic-btn {
+  }
+
+  .search-btn {
+  }
 }

@@ -102,29 +102,30 @@ const Apod = () => {
       <h1>NASA Astronomy Picture of the Day</h1>
       <div className='apod-actions-container'>
         <div className='apod-date-picker-container'>
-          <label htmlFor='datePicker'>Search a Date</label>
-          <br></br>
+          {/* <label htmlFor='date-picker'>Search a Date</label>
+          <br></br> */}
           <DatePicker
             selected={startDate}
             maxDate={new Date()}
             onChange={date => setStartDate(date)}
             minDate={new Date(1995, 6, 20)}
             onSelect={date => handleSelectDate(date)}
-            name={`datePicker`}
+            className={`date-picker`}
+            // name={`date-picker`}
           />
         </div>
-        <Button variant='outline-success' onClick={handleRandom}>
+        <Button variant='outline-success' onClick={handleRandom} className = 'random-pic-btn'>
           Random Picture
         </Button>
-        <Button variant='outline-warning' onClick={handleToday}>
+        <Button variant='outline-warning' onClick={handleToday} className='today-pic-btn'>
           Today's Picture
         </Button>{' '}
-        <Link to='/search' className='search-button'>
-          <Button variant='outline-info'>Search NASA Image Library</Button>
+        <Link to='/search' className='search-btn'>
+          <Button variant='outline-info' className='search-btn'>Search NASA Image Library</Button>
         </Link>
       </div>
 
-      <div className='apod-content-container my-5'>
+      <div className='apod-content-container'>
         <div className='apod-media-container'>{renderMedia()}</div>
         <div className='apod-display-text-container'>
           <p className='apod-display-date'>
