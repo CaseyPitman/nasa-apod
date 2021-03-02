@@ -8,10 +8,11 @@ import Search from './components/Search';
 
 //Styles
 import 'bootswatch/dist/cyborg/bootstrap.min.css';
+import './css/app.css'
 
 function App() {
   return (
-    <div className='App'>
+    <div className='app'>
       <Router>
         <Switch>
           <Route exact path='/'>

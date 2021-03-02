@@ -15,20 +15,16 @@
 
   width: 50%;
 }
-
-.apod-media-container {
-  position: relative;
-  width: 50%;
-}
-
 .apod-content-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-flow: row wrap;
 }
 
 .apod-media-container {
   border: 1px solid white;
+  width: 50%;
 }
 
 .media-image {
@@ -53,4 +49,33 @@
 .apod-display-explanation {
   font-size: 16px;
   text-align: justify;
+}
+
+/* Large Tablet Portrait */
+
+@media only screen and (max-width: 1024px) {
+  .apod-actions-container {
+    width: 70%;
+  }
+
+  .apod-media-container {
+    width: 100%;
+  }
+
+  .apod-display-text-container {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 10px;
+    width: 100%;
+  }
+}
+
+/* Tablet Portrat */
+
+@media only screen and (max-width: 768px){
+  .apod-actions-container {
+    justify-content: space-between;
+    width:100%;
+  }
+
 }
