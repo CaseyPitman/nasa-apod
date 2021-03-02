@@ -5,21 +5,35 @@
   width: 95%;
 }
 
-.apod-date-picker-container {
-  display: inline-block;
+.apod-header {
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
+
+.apod-headline {
+  font-size: clamp(36px, 3vw, 50px);
+}
+
 .apod-actions-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-end;
   flex-flow: row wrap;
+  margin:25px auto;
   width: 100%;
 }
 
-.apod-date-picker-container,
-.random-pic-btn,
-.today-pic-btn {
-  margin-right: 20px;
+.random-pic,
+.today-pic {
+  margin: 0;
+}
+
+.random-pic:hover,
+.today-pic:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .apod-content-container {
@@ -76,40 +90,7 @@
 }
 
 @media only screen and (max-width: 767px) {
- 
-  .apod{
-    width:90%;
-  }
-
-  .apod-date-picker-container,
-  .random-pic-btn,
-  .search-btn,.today-pic-btn {
-    margin: 0px;
-    width: 100%;
-  }
-
-  .date-picker{
-    margin:auto;
-  }
-  .apod-date-picker-container {
-   
-    order: 3;
- 
-  }
-
-  .today-pic-btn {
-
-    order: 4;
- 
-  }
-
-  .random-pic-btn {
-    order: 5;
-  }
-
-  .today-pic-btn {
-  }
-
-  .search-btn {
+  .apod {
+    width: 90%;
   }
 }

@@ -15,7 +15,6 @@ import dayjs from 'dayjs';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../css/apod.css';
 
-
 const Apod = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
@@ -96,10 +95,13 @@ const Apod = () => {
   };
 
   // TODO: loading spinner for images.
+  //FIXME: when on other date and reload page, reset the url to today
 
   return (
     <div className='apod'>
-      <h1>NASA Astronomy Picture of the Day</h1>
+      <div className='apod-header'>
+        <h1 className='apod-headline'>NASA Astronomy Picture of the Day</h1>
+      </div>
       <div className='apod-actions-container'>
         <div className='apod-date-picker-container'>
           {/* <label htmlFor='date-picker'>Search a Date</label>
@@ -114,26 +116,31 @@ const Apod = () => {
             // name={`date-picker`}
           />
         </div>
-        <Button variant='outline-success' onClick={handleRandom} className = 'random-pic-btn'>
-          Random Picture
-        </Button>
-        <Button variant='outline-warning' onClick={handleToday} className='today-pic-btn'>
+        <h5
+          variant='outline-warning'
+          onClick={handleToday}
+          className='today-pic text-danger'>
           Today's Picture
-        </Button>{' '}
-        <Link to='/search' className='search-btn'>
-          <Button variant='outline-info' className='search-btn'>Search NASA Image Library</Button>
+        </h5>
+        <h5 onClick={handleRandom} className='random-pic text-danger'>
+          Random Picture
+        </h5>
+        <Link to='/search' className='search-btn-wrapper'>
+          <Button variant='info' className='search-btn'>
+            Search NASA Image Library
+          </Button>
         </Link>
       </div>
 
       <div className='apod-content-container'>
         <div className='apod-media-container'>{renderMedia()}</div>
         <div className='apod-display-text-container'>
-          <p className='apod-display-date'>
+          <h5 className='apod-display-date'>
             <strong>{displayDate()}</strong>
-          </p>
-          <p className='apod-display-title'>
+          </h5>
+          <h5 className='apod-display-title'>
             <strong>{apodData.title}</strong>
-          </p>
+          </h5>
           <p className='apod-display-explanation'>{apodData.explanation}</p>
         </div>
       </div>
