@@ -101,7 +101,6 @@ const Apod = () => {
     <div className='apod'>
       <div className='apod-header'>
         <h1 className='apod-headline'>NASA Astronomy Picture of the Day</h1>
-        <img src = 'https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg' alt='NASA logo'/>
       </div>
       <div className='search-link-container'>
         <Link to='/search' className='search-btn-wrapper'>
@@ -109,6 +108,7 @@ const Apod = () => {
             Search NASA Image Library
           </Button>
         </Link>
+        <img src = 'https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg' alt='NASA logo'/>
       </div>
 
       <div className='apod-content-container'>

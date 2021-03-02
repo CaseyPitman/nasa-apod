@@ -18,6 +18,9 @@
 }
 
 .search-link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 30px 0;
 }
 
@@ -26,7 +29,7 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-flow: row wrap;
-  margin: 0px auto 15px;
+  margin: 0px auto 25px;
   width: 100%;
 }
 
