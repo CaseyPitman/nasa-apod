@@ -101,32 +101,11 @@ const Apod = () => {
     <div className='apod'>
       <div className='apod-header'>
         <h1 className='apod-headline'>NASA Astronomy Picture of the Day</h1>
+        <img src = 'https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg' alt='NASA logo'/>
       </div>
-      <div className='apod-actions-container'>
-        <div className='apod-date-picker-container'>
-          {/* <label htmlFor='date-picker'>Search a Date</label>
-          <br></br> */}
-          <DatePicker
-            selected={startDate}
-            maxDate={new Date()}
-            onChange={date => setStartDate(date)}
-            minDate={new Date(1995, 6, 20)}
-            onSelect={date => handleSelectDate(date)}
-            className={`date-picker`}
-            // name={`date-picker`}
-          />
-        </div>
-        <h5
-          variant='outline-warning'
-          onClick={handleToday}
-          className='today-pic text-danger'>
-          Today's Picture
-        </h5>
-        <h5 onClick={handleRandom} className='random-pic text-danger'>
-          Random Picture
-        </h5>
+      <div className='search-link-container'>
         <Link to='/search' className='search-btn-wrapper'>
-          <Button variant='info' className='search-btn'>
+          <Button variant='info' className='search-btn' size='lg'>
             Search NASA Image Library
           </Button>
         </Link>
@@ -135,6 +114,28 @@ const Apod = () => {
       <div className='apod-content-container'>
         <div className='apod-media-container'>{renderMedia()}</div>
         <div className='apod-display-text-container'>
+          <div className='apod-actions-container'>
+            <div className='apod-date-picker-container'>
+              <DatePicker
+                selected={startDate}
+                maxDate={new Date()}
+                onChange={date => setStartDate(date)}
+                minDate={new Date(1995, 6, 20)}
+                onSelect={date => handleSelectDate(date)}
+                className={`date-picker`}
+              />
+            </div>
+            <Button
+              variant='success'
+              onClick={handleToday}
+              className='today-pic'
+              size='sm'>
+              Today's Picture
+            </Button>
+            <Button onClick={handleRandom} className='random-pic' size='sm'>
+              Random Picture
+            </Button>
+          </div>
           <h5 className='apod-display-date'>
             <strong>{displayDate()}</strong>
           </h5>

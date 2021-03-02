@@ -6,6 +6,7 @@
 }
 
 .apod-header {
+  background-image: url('../images/galaxy.jpg');
   border: 1px solid white;
   padding-left: 10px;
   padding-top: 50px;
@@ -16,12 +17,16 @@
   font-size: clamp(36px, 3vw, 50px);
 }
 
+.search-link-container {
+  margin: 30px 0;
+}
+
 .apod-actions-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-flow: row wrap;
-  margin:25px auto;
+  margin: 0px auto 15px;
   width: 100%;
 }
 
@@ -41,8 +46,6 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-flow: row wrap;
-
-  margin: 20px auto;
 }
 
 .apod-media-container {
