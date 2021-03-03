@@ -11,7 +11,13 @@
   padding-left: 10px;
   padding-top: 50px;
   padding-bottom: 50px;
+  position: relative;
 }
+  .search-btn-container {
+    position: absolute;
+    bottom:10px; 
+    right:10px;
+  }
 
 .apod-headline {
   font-size: clamp(36px, 3vw, 50px);
@@ -53,6 +59,8 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-flow: row wrap;
+
+  margin-top: 30px;
 }
 
 .apod-media-container {
@@ -124,11 +132,11 @@
   .apod-date-picker-wrapper {
     margin: 10px;
     order: 3;
-    width:100%;
+    width: 100%;
   }
 
-  .apod-date-picker-container{
-    margin:auto;
-    width:50%;
+  .apod-date-picker-container {
+    margin: auto;
+    width: 50%;
   }
 }
