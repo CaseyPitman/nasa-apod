@@ -104,7 +104,7 @@ const Apod = () => {
       </div>
       <div className='search-link-container'>
         <Link to='/search' className='search-btn-wrapper'>
-          <Button variant='info' className='search-btn' size='lg'>
+          <Button variant='info' className='search-btn' >
             Search NASA Image Library
           </Button>
         </Link>
@@ -116,6 +116,7 @@ const Apod = () => {
         <div className='apod-display-text-container'>
           <div className='apod-actions-container'>
             <div className='apod-date-picker-container'>
+              <label htmlFor='datePicker' className='search-date-label'>See another date &nbsp;</label>
               <DatePicker
                 selected={startDate}
                 maxDate={new Date()}
@@ -123,6 +124,7 @@ const Apod = () => {
                 minDate={new Date(1995, 6, 20)}
                 onSelect={date => handleSelectDate(date)}
                 className={`date-picker`}
+                name={'datePicker'}
               />
             </div>
             <Button
