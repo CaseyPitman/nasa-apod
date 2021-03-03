@@ -29,7 +29,6 @@ const Apod = () => {
       setStartDate(new Date());
     };
     fetch();
-  
   }, []);
 
   const handleSelectDate = async date => {
@@ -69,7 +68,7 @@ const Apod = () => {
     if (!apodData) {
       return 'date goes here';
     }
-    const formattedDate = dayjs(apodData.date).format('MMM. DD, YYYY');
+    const formattedDate = dayjs(apodData.date).format('MMMM DD, YYYY');
     return formattedDate;
   };
 
@@ -97,7 +96,6 @@ const Apod = () => {
   };
 
   // TODO: loading spinner for images.
- 
 
   return (
     <div className='apod'>
@@ -106,28 +104,34 @@ const Apod = () => {
       </div>
       <div className='search-link-container'>
         <Link to='/search' className='search-btn-wrapper'>
-          <Button variant='info' className='search-btn' >
+          <Button variant='info' className='search-btn'>
             Search NASA Image Library
           </Button>
         </Link>
-        <img src = 'https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg' alt='NASA logo'/>
+        <img
+          src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
+          alt='NASA logo'
+        />
       </div>
 
       <div className='apod-content-container'>
         <div className='apod-media-container'>{renderMedia()}</div>
         <div className='apod-display-text-container'>
           <div className='apod-actions-container'>
-            <div className='apod-date-picker-container'>
-              <label htmlFor='datePicker' className='search-date-label'>See another date &nbsp;</label>
-              <DatePicker
-                selected={startDate}
-                maxDate={new Date()}
-                onChange={date => setStartDate(date)}
-                minDate={new Date(1995, 6, 20)}
-                onSelect={date => handleSelectDate(date)}
-                className={`date-picker`}
-                name={'datePicker'}
-              />
+            <div className='apod-date-picker-wrapper'>
+              <div className='apod-date-picker-container'>
+                <DatePicker
+                  selected={startDate}
+                  maxDate={new Date()}
+                  onChange={date => setStartDate(date)}
+                  minDate={new Date(1995, 6, 20)}
+                  onSelect={date => handleSelectDate(date)}
+                  dateFormat={'MMMM dd, yyyy'}
+       
+                  className={`date-picker`}
+                  name={'datePicker'}
+                />
+              </div>
             </div>
             <Button
               variant='success'
