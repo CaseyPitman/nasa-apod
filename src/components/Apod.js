@@ -22,12 +22,14 @@ const Apod = () => {
   const history = useHistory();
 
   useEffect(() => {
+    handleToday();
     const fetch = async () => {
       const result = await fetchApod();
       setApodData(result);
       setStartDate(new Date());
     };
     fetch();
+  
   }, []);
 
   const handleSelectDate = async date => {
@@ -95,7 +97,7 @@ const Apod = () => {
   };
 
   // TODO: loading spinner for images.
-  //FIXME: when on other date and reload page, reset the url to today
+ 
 
   return (
     <div className='apod'>
