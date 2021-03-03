@@ -52,7 +52,7 @@
 }
 
 .apod-media-container {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   width: 50%;
 }
 
@@ -62,6 +62,9 @@
   margin: auto;
   height: 100%;
   width: 100%;
+}
+.media-video {
+  border: solid 1px white;
 }
 
 .apod-display-text-container {

@@ -76,13 +76,13 @@ const Apod = () => {
       return <div></div>;
     } else if (apodData.media_type === 'video') {
       return (
-        <div className='embed-responsive embed-responsive-16by9'>
+        <div className='embed-responsive embed-responsive-16by9 media-video'>
           <iframe
             src={apodData.url}
             title={apodData.title}
             allowFullScreen={true}
             border='1px solid white'
-            className='media-video embed-responsive-item'
+            className='embed-responsive-item'
           />
         </div>
       );
