@@ -100,18 +100,24 @@ const Apod = () => {
   return (
     <div className='apod'>
       <div className='apod-header'>
-        <h1 className='apod-headline'>NASA Astronomy Picture of the Day</h1>
-      </div>
-      <div className='search-link-container'>
-        <Link to='/search' className='search-btn-wrapper'>
-          <Button variant='info' className='search-btn'>
-            Search NASA Image Library
-          </Button>
-        </Link>
-        <img
-          src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
-          alt='NASA logo'
-        />
+        <h1 className='apod-headline'>
+          <img
+            src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
+            alt='NASA logo'
+          />
+          Astronomy Picture of the Day
+        </h1>
+        <div className='search-link-container'>
+          <Link to='/search' className='search-btn-wrapper'>
+            <Button variant='info' className='search-btn'>
+              Search NASA Image Library
+            </Button>
+          </Link>
+          {/* <img
+            src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
+            alt='NASA logo'
+          /> */}
+        </div>
       </div>
 
       <div className='apod-content-container'>
@@ -127,7 +133,6 @@ const Apod = () => {
                   minDate={new Date(1995, 6, 20)}
                   onSelect={date => handleSelectDate(date)}
                   dateFormat={'MMMM dd, yyyy'}
-       
                   className={`date-picker`}
                   name={'datePicker'}
                 />
