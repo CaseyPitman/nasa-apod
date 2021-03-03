@@ -60,9 +60,16 @@ const Search = () => {
     }
     const thumbnails = searchResults.items.map(image => {
       return (
-        <div key={image.data[0].nasa_id} onClick={() => openModal(image)}>
-          <img src={image.links[0].href} alt={image.data[0].title} />;
-          <p>{image.data[0].title}</p>
+        <div
+          key={image.data[0].nasa_id}
+          onClick={() => openModal(image)}
+          className='grid-item'>
+          <p className='grid-item-title'>{image.data[0].title}</p>
+          <img
+            src={image.links[0].href}
+            alt={image.data[0].title}
+            className='grid-item-thumbnail'
+          />
         </div>
       );
     });
@@ -142,7 +149,7 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <div className='search-results'>{renderResults()}</div>
+      <div className='search-results grid-container'>{renderResults()}</div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
