@@ -44,13 +44,11 @@ const Search = () => {
   };
 
   //TODO: add pagination controls
-  //TODO: add modal view of full size image w/ title, description and photgrapher if available.
+  //TODO: add popover w/ title for each image. 
+  //FIXME: when closing modal, don't reset to top of page. 
+  //FIXME: when reloading page reset url.
 
-  // const handleImageClick =  (image) => {
-  //   console.log(image);
-  //   openModal();
-  // }
-
+  
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
