@@ -12,6 +12,8 @@ import fetchSearch from '../axios/fetchSearch';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Pagination from 'react-bootstrap/Pagination';
+import PageItem from 'react-bootstrap/PageItem';
 
 //styles
 import '../css/search.css';
@@ -20,7 +22,7 @@ Modal.setAppElement(`#root`);
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchPage, setSearchPage] = useState(`1`);
+  const [searchPage, setSearchPage] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
@@ -44,11 +46,10 @@ const Search = () => {
   };
 
   //TODO: add pagination controls
-  //TODO: add popover w/ title for each image. 
-  //FIXME: when closing modal, don't reset to top of page. 
+  //TODO: add popover w/ title for each image.
+  //FIXME: when closing modal, don't reset to top of page.
   //FIXME: when reloading page reset url.
 
-  
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
@@ -122,11 +123,23 @@ const Search = () => {
     );
   };
 
+  const renderPagination = () => {
+    const pages = [];
+    for (let i = 1; i < 5; i++) {
+      pages.push(
+        <Pagination.Item key={i} active={searchPage === i}>
+          {i}
+        </Pagination.Item>
+      );
+    }
+    return pages;
+  };
+
   return (
     <div>
       <h1>Search Page</h1>
       <Link to='/apod/today'>
-        <Button variant='outline-info'>Back to Picture of the Day</Button>
+        <Button variant='info'>Back to Picture of the Day</Button>
       </Link>
       <Form onSubmit={handleSubmit}>
         <InputGroup>
@@ -147,7 +160,11 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      <div className='page-buttons'>
+        <Pagination >{renderPagination()}</Pagination>
+      </div>
       <div className='search-results grid-container'>{renderResults()}</div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
