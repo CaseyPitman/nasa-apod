@@ -1,7 +1,6 @@
 // This component will allow users to search the NASA image library.
 
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 
@@ -23,11 +22,17 @@ Modal.setAppElement(`#root`);
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalHits, setTotalHits] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
 
   const history = useHistory();
+
+  useEffect(() => {
+    history.push('/search/');
+  }, [history]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -40,22 +45,38 @@ const Search = () => {
     };
     const result = await fetchSearch(query);
     console.log(result);
+<<<<<<< HEAD
 
+=======
+>>>>>>> pagination
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
+
+    setTotalHits(result.metadata.total_hits);
+    setTotalPages(Math.ceil(result.metadata.total_hits / 100));
   };
 
-  //TODO: add pagination controls
+  const changePage = dir => {
+    console.log(`you wish to go to ${dir} page`);
+    //set cur page
+    //make call for next or previous
+    //set results to re-render
+  };
+
+  //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
   //FIXME: when closing modal, don't reset to top of page.
+<<<<<<< HEAD
   //FIXME: when reloading page reset url.
   //FIXME: pagination should only show when results exist.
+=======
+>>>>>>> pagination
 
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
     }
-    if (!searchResults.links) {
+    if (totalHits < 1) {
       return <div>No result</div>;
     }
     const thumbnails = searchResults.items.map(image => {
@@ -74,6 +95,22 @@ const Search = () => {
       );
     });
     return thumbnails;
+  };
+
+  const renderPagination = () => {
+    if (totalPages === 0) {
+      return <div></div>;
+    }
+
+    return (
+      <Pagination className='pagination'>
+        <Pagination.Prev onClick={() => changePage('prev')} />
+        <p className='pagination-page-count'>
+          Page {searchPage} of {totalPages}
+        </p>
+        <Pagination.Next onClick={() => changePage('next')} />
+      </Pagination>
+    );
   };
 
   //MODAL FUNCS
@@ -124,6 +161,7 @@ const Search = () => {
     );
   };
 
+<<<<<<< HEAD
   //TODO: dynamically render pagination based on number of results. Complex w/ ellipses?
   const renderPagination = () => {
     const pages = [];
@@ -137,6 +175,8 @@ const Search = () => {
     return pages;
   };
 
+=======
+>>>>>>> pagination
   return (
     <div>
       <h1>Search Page</h1>
@@ -162,6 +202,7 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+<<<<<<< HEAD
       <div className='page-buttons'>
         <Pagination>
           {' '}
@@ -172,8 +213,11 @@ const Search = () => {
           <Pagination.Last />
         </Pagination>
       </div>
+=======
+      {renderPagination()}
+>>>>>>> pagination
       <div className='search-results grid-container'>{renderResults()}</div>
-
+      {renderPagination()}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
