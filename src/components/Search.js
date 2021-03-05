@@ -66,11 +66,8 @@ const Search = () => {
   //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
   //FIXME: when closing modal, don't reset to top of page.
-<<<<<<< HEAD
   //FIXME: when reloading page reset url.
   //FIXME: pagination should only show when results exist.
-=======
->>>>>>> pagination
 
   const renderResults = () => {
     if (searchResults.length === 0) {
