@@ -1,6 +1,6 @@
 // This component will allow users to search the NASA image library.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -29,6 +29,11 @@ const Search = () => {
   const [currentImage, setCurrentImage] = useState({});
 
   const history = useHistory();
+
+  useEffect(() => {
+
+    history.push('/search/');
+  }, [history]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -126,6 +131,10 @@ const Search = () => {
   };
 
   const renderPagination = () => {
+    if (totalPages === 0) {
+      return <div></div>;
+    }
+
     return (
       <Pagination className='pagination'>
         <Pagination.Prev />
