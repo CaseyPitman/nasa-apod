@@ -23,6 +23,7 @@ Modal.setAppElement(`#root`);
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
@@ -40,9 +41,10 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
-
+    console.log(result);
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
+    setTotalPages(Math.ceil(result.metadata.total_hits / 100));
   };
 
   //TODO: add pagination controls
@@ -124,15 +126,15 @@ const Search = () => {
   };
 
   const renderPagination = () => {
-    const pages = [];
-    for (let i = 1; i < 5; i++) {
-      pages.push(
-        <Pagination.Item key={i} active={searchPage === i}>
-          {i}
-        </Pagination.Item>
-      );
-    }
-    return pages;
+    return (
+      <Pagination className='pagination'>
+        <Pagination.Prev />
+        <p className='pagination-page-count'>
+          Page {searchPage} of {totalPages}
+        </p>
+        <Pagination.Next />
+      </Pagination>
+    );
   };
 
   return (
@@ -160,11 +162,9 @@ const Search = () => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <div className='page-buttons'>
-        <Pagination >{renderPagination()}</Pagination>
-      </div>
+      {renderPagination()}
       <div className='search-results grid-container'>{renderResults()}</div>
-
+      {renderPagination()}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
