@@ -53,6 +53,13 @@ const Search = () => {
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
   };
 
+  const changePage = dir => {
+    console.log(`you wish to go to ${dir} page`);
+    //set cur page
+    //make call for next or previous
+    //set results to re-render
+  };
+
   //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
   //FIXME: when closing modal, don't reset to top of page.
@@ -89,11 +96,11 @@ const Search = () => {
 
     return (
       <Pagination className='pagination'>
-        <Pagination.Prev />
+        <Pagination.Prev onClick={() => changePage('prev')} />
         <p className='pagination-page-count'>
           Page {searchPage} of {totalPages}
         </p>
-        <Pagination.Next />
+        <Pagination.Next onClick={() => changePage('next')} />
       </Pagination>
     );
   };
