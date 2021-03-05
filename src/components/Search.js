@@ -31,7 +31,6 @@ const Search = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(`submit: ${searchTerm}`);
     const query = {
       params: {
         q: searchTerm,
@@ -40,6 +39,7 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
+    console.log(result);
 
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
@@ -49,6 +49,7 @@ const Search = () => {
   //TODO: add popover w/ title for each image.
   //FIXME: when closing modal, don't reset to top of page.
   //FIXME: when reloading page reset url.
+  //FIXME: pagination should only show when results exist.
 
   const renderResults = () => {
     if (searchResults.length === 0) {
@@ -123,6 +124,7 @@ const Search = () => {
     );
   };
 
+  //TODO: dynamically render pagination based on number of results. Complex w/ ellipses?
   const renderPagination = () => {
     const pages = [];
     for (let i = 1; i < 5; i++) {
@@ -161,7 +163,14 @@ const Search = () => {
         </InputGroup>
       </Form>
       <div className='page-buttons'>
-        <Pagination >{renderPagination()}</Pagination>
+        <Pagination>
+          {' '}
+          <Pagination.First />
+          <Pagination.Prev />
+          {renderPagination()}
+          <Pagination.Next />
+          <Pagination.Last />
+        </Pagination>
       </div>
       <div className='search-results grid-container'>{renderResults()}</div>
 
