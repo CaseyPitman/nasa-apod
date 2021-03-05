@@ -1,7 +1,6 @@
 // This component will allow users to search the NASA image library.
 
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 
@@ -24,6 +23,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalHits, setTotalHits] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
@@ -31,7 +31,6 @@ const Search = () => {
   const history = useHistory();
 
   useEffect(() => {
-
     history.push('/search/');
   }, [history]);
 
@@ -49,19 +48,20 @@ const Search = () => {
     console.log(result);
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setSearchResults(result);
+
+    setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
   };
 
-  //TODO: add pagination controls
+  //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
   //FIXME: when closing modal, don't reset to top of page.
-  //FIXME: when reloading page reset url.
 
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
     }
-    if (!searchResults.links) {
+    if (totalHits < 1) {
       return <div>No result</div>;
     }
     const thumbnails = searchResults.items.map(image => {
@@ -80,6 +80,22 @@ const Search = () => {
       );
     });
     return thumbnails;
+  };
+
+  const renderPagination = () => {
+    if (totalPages === 0) {
+      return <div></div>;
+    }
+
+    return (
+      <Pagination className='pagination'>
+        <Pagination.Prev />
+        <p className='pagination-page-count'>
+          Page {searchPage} of {totalPages}
+        </p>
+        <Pagination.Next />
+      </Pagination>
+    );
   };
 
   //MODAL FUNCS
@@ -127,22 +143,6 @@ const Search = () => {
           <div></div>
         )}
       </div>
-    );
-  };
-
-  const renderPagination = () => {
-    if (totalPages === 0) {
-      return <div></div>;
-    }
-
-    return (
-      <Pagination className='pagination'>
-        <Pagination.Prev />
-        <p className='pagination-page-count'>
-          Page {searchPage} of {totalPages}
-        </p>
-        <Pagination.Next />
-      </Pagination>
     );
   };
 
