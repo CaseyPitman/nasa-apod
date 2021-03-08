@@ -78,51 +78,65 @@ const Search = () => {
     setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
     //if result has a next page then set it
-    if (result.links.length >=1){
-      setNextPage(2)
-      setPrevPage(1)
+    if (result.links && result.links.length >= 1) {
+      setNextPage(2);
+      setPrevPage(0);
     }
   };
 
-
   const changePage = async dir => {
     console.log(`you wish to go to ${dir} page: ${nextPage}`);
-  
-    let goToPage =null;
-    if (dir === 'next'){
+
+    let goToPage = null;
+    if (dir === 'next') {
       goToPage = nextPage;
-    } else if (dir === 'prev'){
+    } else if (dir === 'prev') {
       goToPage = prevPage;
     }
-    
+
     const query = {
       params: {
         q: searchTerm,
         media_type: 'image',
-        page: goToPage
+        page: goToPage,
       },
     };
     const result = await fetchSearch(query);
     console.log(result);
     setSearchResults(result);
-    history.push(`/search/${searchTerm}/page=${nextPage}`);
+    history.push(
+      `/search/${searchTerm}/page=${dir === 'next' ? nextPage : prevPage}`
+    );
 
-    //update page and next page and previous page  
-
-    //alter this to add or subtract based on dir
-    const newNextPage = nextPage + 1;
-    const newPrevPage = prevPage + 1;
+  
+    setSearchPage(dir === 'next' ? nextPage : prevPage);
+    const newNextPage = dir === 'next' ? nextPage + 1 : nextPage - 1;
+    const newPrevPage = dir === 'next' ? prevPage + 1 : prevPage - 1;
     setNextPage(newNextPage);
     setPrevPage(newPrevPage);
-    
- 
 
     console.log(searchPage);
 
-
-    //make call for next or previous
-    //set results to re-render
   };
+
+  const renderPagination = () => {
+    if (totalPages === 0) {
+      return <div></div>;
+    }
+
+    const isDisabled = '';
+
+    return (
+      <Pagination className='pagination'>
+        <Pagination.Prev onClick={() => changePage('prev')} className = {isDisabled}/>
+        <p className='pagination-page-count'>
+          Page {searchPage} of {totalPages}
+        </p>
+        <Pagination.Next onClick={() => changePage('next')} />
+      </Pagination>
+    );
+  };
+
 
   //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
@@ -154,22 +168,7 @@ const Search = () => {
     return thumbnails;
   };
 
-  const renderPagination = () => {
-    if (totalPages === 0) {
-      return <div></div>;
-    }
-
-    return (
-      <Pagination className='pagination'>
-        <Pagination.Prev onClick={() => changePage('prev')} />
-        <p className='pagination-page-count'>
-          Page {searchPage} of {totalPages}
-        </p>
-        <Pagination.Next onClick={() => changePage('next')} />
-      </Pagination>
-    );
-  };
-
+ 
   //MODAL FUNCS
   // Open modal
   const openModal = image => {
