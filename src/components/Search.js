@@ -68,13 +68,13 @@ const Search = () => {
       params: {
         q: searchTerm,
         media_type: 'image',
-        page: searchPage,
+        page: 1,
       },
     };
     const result = await fetchSearch(query);
     console.log(result);
     setSearchResults(result);
-    history.push(`/search/${searchTerm}/page=${searchPage}`);
+    history.push(`/search/${searchTerm}/page=1`);
     setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
     //if result has a next page then set it
@@ -108,7 +108,6 @@ const Search = () => {
       `/search/${searchTerm}/page=${dir === 'next' ? nextPage : prevPage}`
     );
 
-  
     setSearchPage(dir === 'next' ? nextPage : prevPage);
     const newNextPage = dir === 'next' ? nextPage + 1 : nextPage - 1;
     const newPrevPage = dir === 'next' ? prevPage + 1 : prevPage - 1;
@@ -116,7 +115,6 @@ const Search = () => {
     setPrevPage(newPrevPage);
 
     console.log(searchPage);
-
   };
 
   const renderPagination = () => {
@@ -124,19 +122,25 @@ const Search = () => {
       return <div></div>;
     }
 
-    const isDisabled = '';
+    //Enable and disable pagination buttons
+
 
     return (
       <Pagination className='pagination'>
-        <Pagination.Prev onClick={() => changePage('prev')} className = {isDisabled}/>
+        <Pagination.Prev
+          onClick={() => changePage('prev')}
+          className={searchPage === 1 ? 'disabled' : ''}
+        />
         <p className='pagination-page-count'>
           Page {searchPage} of {totalPages}
         </p>
-        <Pagination.Next onClick={() => changePage('next')} />
+        <Pagination.Next
+          onClick={() => changePage('next')}
+          className={searchPage === totalPages ? 'disabled' : ''}
+        />
       </Pagination>
     );
   };
-
 
   //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
@@ -168,7 +172,6 @@ const Search = () => {
     return thumbnails;
   };
 
- 
   //MODAL FUNCS
   // Open modal
   const openModal = image => {
