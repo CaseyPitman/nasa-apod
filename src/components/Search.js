@@ -22,6 +22,7 @@ Modal.setAppElement(`#root`);
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
+  const [nextPage, setNextPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalHits, setTotalHits] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
@@ -75,14 +76,35 @@ const Search = () => {
     history.push(`/search/${searchTerm}/page=${searchPage}`);
     setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
+    //if result has a next page then set it
+    if (result.links){
+      setNextPage(2)
+    }
   };
 
 
 
   const changePage = async dir => {
-    console.log(`you wish to go to ${dir} page`);
-    //set cur page
-    const newSearchPage = searchPage + 1;
+    console.log(`you wish to go to ${dir} page: ${nextPage}`);
+  
+    let goToPage =null;
+    if (dir === 'next'){
+      goToPage = nextPage;
+    }
+    
+    const query = {
+      params: {
+        q: searchTerm,
+        media_type: 'image',
+        page: goToPage
+      },
+    };
+    const result = await fetchSearch(query);
+    console.log(result);
+    setSearchResults(result);
+    history.push(`/search/${searchTerm}/page=${nextPage}`);
+
+    //update page and next page and previous page
    
     
  
