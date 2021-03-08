@@ -23,6 +23,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
   const [nextPage, setNextPage] = useState(0);
+  const [prevPage, setPrevPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalHits, setTotalHits] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
@@ -77,11 +78,11 @@ const Search = () => {
     setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
     //if result has a next page then set it
-    if (result.links){
+    if (result.links.length >=1){
       setNextPage(2)
+      setPrevPage(1)
     }
   };
-
 
 
   const changePage = async dir => {
@@ -90,6 +91,8 @@ const Search = () => {
     let goToPage =null;
     if (dir === 'next'){
       goToPage = nextPage;
+    } else if (dir === 'prev'){
+      goToPage = prevPage;
     }
     
     const query = {
@@ -104,8 +107,13 @@ const Search = () => {
     setSearchResults(result);
     history.push(`/search/${searchTerm}/page=${nextPage}`);
 
-    //update page and next page and previous page
-   
+    //update page and next page and previous page  
+
+    //alter this to add or subtract based on dir
+    const newNextPage = nextPage + 1;
+    const newPrevPage = prevPage + 1;
+    setNextPage(newNextPage);
+    setPrevPage(newPrevPage);
     
  
 
