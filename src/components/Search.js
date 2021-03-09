@@ -36,30 +36,6 @@ const Search = () => {
     history.push('/search/');
   }, [history]);
 
-  //FIXME: this method creates infinte api calls
-  // useEffect(() => {
-  //   if (searchPage === 0) {
-  //     return;
-  //   }
-  //   const getResults = async () => {
-  //     const query = {
-  //       params: {
-  //         q: searchTerm,
-  //         media_type: 'image',
-  //         page: searchPage,
-  //       },
-  //     };
-  //     const result = await fetchSearch(query);
-  //     console.log(result);
-  //     setSearchResults(result);
-  //     history.push(`/search/${searchTerm}/page=${searchPage}`);
-  //     setTotalHits(result.metadata.total_hits);
-  //     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
-  //     return;
-  //   };
-  //   getResults();
-  // });
-
   const handleSubmit = async e => {
     e.preventDefault();
     setSearchPage(1);
@@ -139,7 +115,7 @@ const Search = () => {
     );
   };
 
-  //TODO: add popover w/ title for each image.
+
   //TODO: modal styles
   //FIXME: when closing modal, don't reset to top of page.
 
@@ -152,7 +128,7 @@ const Search = () => {
     }
     const thumbnails = searchResults.items.map(image => {
       return (
-        <div
+        <button
           key={image.data[0].nasa_id}
           onClick={() => openModal(image)}
           className='grid-item'
@@ -165,7 +141,7 @@ const Search = () => {
             className='grid-item-thumbnail'
           />
           {/* <p className='grid-item-title'>{image.data[0].title}</p> */}
-        </div>
+        </button>
       );
     });
     return thumbnails;
@@ -173,7 +149,8 @@ const Search = () => {
 
   //MODAL FUNCS
   // Open modal
-  const openModal = image => {
+  const openModal = (image )=> {
+   
     setCurrentImage(image);
     setModalIsOpen(true);
   };
