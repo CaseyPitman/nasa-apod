@@ -122,9 +122,6 @@ const Search = () => {
       return <div></div>;
     }
 
-    //Enable and disable pagination buttons
-
-
     return (
       <Pagination className='pagination'>
         <Pagination.Prev
@@ -142,10 +139,9 @@ const Search = () => {
     );
   };
 
-  //TODO: enable pagination controls
   //TODO: add popover w/ title for each image.
+  //TODO: modal styles
   //FIXME: when closing modal, don't reset to top of page.
-  //FIXME: set page to 1 on load and set to 1 at the begin of every search BEFORE the callback for the data Runs - useEffect to run as soon as searchPage changes?
 
   const renderResults = () => {
     if (searchResults.length === 0) {
@@ -159,7 +155,10 @@ const Search = () => {
         <div
           key={image.data[0].nasa_id}
           onClick={() => openModal(image)}
-          className='grid-item'>
+          className='grid-item'
+          data-toggle='tooltip'
+          data-placement='top'
+          title={image.data[0].title}>
           <img
             src={image.links[0].href}
             alt={image.data[0].title}
@@ -250,10 +249,7 @@ const Search = () => {
       {renderPagination()}
       <div className='search-results grid-container'>{renderResults()}</div>
       {renderPagination()}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        preventScroll={false}>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <div>{renderModalContent()}</div>
       </Modal>
     </div>

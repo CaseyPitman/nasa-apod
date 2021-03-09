@@ -46,6 +46,10 @@
   /* height: 95%; */
 }
 
+.grid-item-thumbnail:hover {
+  border: 1px solid rgb(153, 51, 204);
+}
+
 .grid-item-title {
   margin: auto;
   padding: 5px;
