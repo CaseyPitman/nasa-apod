@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
+import dayjs from 'dayjs';
 
 //Helper functions
 import fetchSearch from '../axios/fetchSearch';
@@ -180,12 +181,12 @@ const Search = () => {
           className='modal-image'
         />
         <div className='modal-text-container'>
-          <h2 className='text-dark'>{currentImage.data[0].title}</h2>
+          <h2 className='text-dark modal-headline'>{currentImage.data[0].title}</h2>
           {/* Display date of photo, if it exists */}
           {/* FIXME: format date for display */}
           {currentImage.data[0].date_created ? (
             <p>
-              <strong>Date:</strong> {currentImage.data[0].date_created}
+              <strong>Date:</strong> { dayjs(currentImage.data[0].date_created).format('MMMM DD, YYYY')  }
             </p>
           ) : (
             <div></div>

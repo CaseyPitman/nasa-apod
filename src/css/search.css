@@ -15,11 +15,11 @@
 }
 
 .grid-container {
-  -webkit-column-count: 5;
+  -webkit-column-count: 6;
   /* -webkit-column-gap: 5px; */
-  -moz-column-count: 5;
+  -moz-column-count: 6;
   /* -moz-column-gap: 5px; */
-  column-count: 5;
+  column-count: 6;
   column-gap: 0px;
   margin: 20px auto;
   width: 95%;
@@ -102,8 +102,10 @@
   width: 45%;
 }
 
-.close-modal-btn {
+.modal-headline{
+  font-size: clamp(18px, 2vw, 40px)
 }
+
 
 @media (max-width: 1200px) {
   .grid-container {
