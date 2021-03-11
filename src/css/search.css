@@ -68,11 +68,11 @@
 
 /* MODAL STYLES */
 
-.ReactModal__Content--after-open{
-  width:66%;
+.ReactModal__Content--after-open {
+  width: 66%;
   margin: auto;
   height: auto;
-  max-height:66%;
+  max-height: 66%;
 }
 
 .modal-content-container {
@@ -80,11 +80,10 @@
   justify-content: space-around;
   align-items: flex-start;
   flex-flow: row wrap;
-  
 }
 
 .close-modal-btn-container {
-  margin-bottom:20px;
+  margin-bottom: 20px;
   width: 100%;
 }
 
@@ -102,16 +101,20 @@
   width: 45%;
 }
 
-.modal-headline{
-  font-size: clamp(18px, 2vw, 40px)
+.modal-headline {
+  font-size: clamp(18px, 2vw, 40px);
 }
-
 
 @media (max-width: 1200px) {
   .grid-container {
     -moz-column-count: 4;
     -webkit-column-count: 4;
     column-count: 4;
+  }
+
+  .ReactModal__Content--after-open {
+    height: 40%;
+    width: 80%;
   }
 }
 
