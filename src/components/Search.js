@@ -164,7 +164,7 @@ const Search = () => {
       return <div></div>;
     }
     return (
-      <div className='modal-content-container'>
+      <div className='modal-content-wrapper'>
         <div className='close-modal-btn-container'>
           <Button
             size='sm'
@@ -175,31 +175,38 @@ const Search = () => {
             Close
           </Button>
         </div>
-        <img
-          src={currentImage.links[0].href}
-          alt={currentImage.data[0].title}
-          className='modal-image'
-        />
-        <div className='modal-text-container'>
-          <h2 className='text-dark modal-headline'>{currentImage.data[0].title}</h2>
-          {/* Display date of photo, if it exists */}
-          {/* FIXME: format date for display */}
-          {currentImage.data[0].date_created ? (
-            <p>
-              <strong>Date:</strong> { dayjs(currentImage.data[0].date_created).format('MMMM DD, YYYY')  }
-            </p>
-          ) : (
-            <div></div>
-          )}
-          {/* Display description if it exists && it is not identical to the title */}
-          {currentImage.data[0].description &&
-          currentImage.data[0].description !== currentImage.data[0].title ? (
-            <p>
-              <strong>Description:</strong> {currentImage.data[0].description}
-            </p>
-          ) : (
-            <div></div>
-          )}
+
+        <div className='modal-content-container'>
+          <img
+            src={currentImage.links[0].href}
+            alt={currentImage.data[0].title}
+            className='modal-image'
+          />
+          <div className='modal-text-container'>
+            <h2 className='text-dark modal-headline'>
+              {currentImage.data[0].title}
+            </h2>
+            {/* Display date of photo, if it exists */}
+            {currentImage.data[0].date_created ? (
+              <p>
+                <strong>Date:</strong>{' '}
+                {dayjs(currentImage.data[0].date_created).format(
+                  'MMMM DD, YYYY'
+                )}
+              </p>
+            ) : (
+              <div></div>
+            )}
+            {/* Display description if it exists && it is not identical to the title */}
+            {currentImage.data[0].description &&
+            currentImage.data[0].description !== currentImage.data[0].title ? (
+              <p>
+                <strong>Description:</strong> {currentImage.data[0].description}
+              </p>
+            ) : (
+              <div></div>
+            )}
+          </div>
         </div>
       </div>
     );

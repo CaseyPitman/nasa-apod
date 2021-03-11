@@ -68,27 +68,38 @@
 
 /* MODAL STYLES */
 
+.ReactModal__Content,
 .ReactModal__Content--after-open {
   width: 66%;
   margin: auto;
-  height: auto;
-  max-height: 66%;
+  height: 66%;
+  min-height:500px;
 }
 
-.modal-content-container {
+.modal-content-wrapper {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: center;
+  align-content: space-around;
   flex-flow: row wrap;
 }
 
 .close-modal-btn-container {
+  align-self: flex-start;
   margin-bottom: 20px;
   width: 100%;
 }
 
 .close-modal-btn {
   float: right;
+}
+
+.modal-content-container {
+  align-self: center;
+  height: 100%;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .modal-image {
