@@ -68,12 +68,21 @@
 
 /* MODAL STYLES */
 
-.ReactModal__Content,
-.ReactModal__Content--after-open {
-  width: 66%;
+.modal-content-window {
+  height: auto;
   margin: auto;
-  height: 66%;
-  min-height:500px;
+  overflow: auto;
+  padding: 20px;
+  -webkit-overflow-scrolling: touch;
+  max-height: 90%;
+  width: 66%;
+}
+
+.ReactModal__Overlay,
+.ReactModal__Overlay--after-open {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content-wrapper {
@@ -100,11 +109,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-flow: row wrap;
 }
 
 .modal-image {
   border: 1px solid white;
   display: inline-block;
+  height: auto;
   width: 45%;
 }
 
@@ -116,16 +127,25 @@
   font-size: clamp(18px, 2vw, 40px);
 }
 
-@media (max-width: 1200px) {
+/* ipad pro landscape */
+
+@media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  .modal-content-window {
+    width: 90%;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 1024px) {
   .grid-container {
     -moz-column-count: 4;
     -webkit-column-count: 4;
     column-count: 4;
   }
 
-  .ReactModal__Content--after-open {
-    height: 40%;
-    width: 80%;
+  .modal-content-window {
+    width: 90%;
+    padding-bottom: 50px;
   }
 }
 
@@ -141,6 +161,15 @@
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2;
+  }
+
+  .modal-image {
+    width: 100%;
+  }
+
+  .modal-text-container {
+    margin-top: 15px;
+    width: 100%;
   }
 }
 

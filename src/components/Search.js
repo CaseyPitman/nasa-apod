@@ -242,7 +242,10 @@ const Search = () => {
       {renderPagination()}
       <div className='search-results grid-container'>{renderResults()}</div>
       {renderPagination()}
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className='modal-content-window'>
         <div>{renderModalContent()}</div>
       </Modal>
     </div>
