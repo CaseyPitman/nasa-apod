@@ -214,31 +214,39 @@ const Search = () => {
 
   return (
     <div>
-      <h1>Search Page</h1>
-      <Link to='/apod/today'>
-        <Button variant='info'>Back to Picture of the Day</Button>
-      </Link>
-      <Form onSubmit={handleSubmit}>
-        <InputGroup>
-          <Form.Control
-            placeholder='Search the NASA image archives'
-            aria-label='Search Term'
-            aria-describedby='basic-addon2'
-            value={searchTerm}
-            onChange={e => {
-              setSearchTerm(e.target.value);
-            }}
+      <div className='search-header'>
+        <h1>
+          <img
+            src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
+            alt='NASA logo'
           />
-          <InputGroup.Append>
-            <Button
-              variant='outline-success'
-              type='submit'
-              className='submit-search-button'>
-              Search
-            </Button>
-          </InputGroup.Append>
-        </InputGroup>
-      </Form>
+          Image Archive
+        </h1>
+        <Link to='/apod/today'>
+          <Button variant='info'>Back to Picture of the Day</Button>
+        </Link>
+        <Form onSubmit={handleSubmit}>
+          <InputGroup>
+            <Form.Control
+              placeholder='Search the NASA image archives'
+              aria-label='Search Term'
+              aria-describedby='basic-addon2'
+              value={searchTerm}
+              onChange={e => {
+                setSearchTerm(e.target.value);
+              }}
+            />
+            <InputGroup.Append>
+              <Button
+                variant='outline-success'
+                type='submit'
+                className='submit-search-button'>
+                Search
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form>
+      </div>
       {renderPagination()}
       <div className='search-results grid-container'>{renderResults()}</div>
       {renderPagination()}
