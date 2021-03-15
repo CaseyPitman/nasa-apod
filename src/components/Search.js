@@ -213,9 +213,9 @@ const Search = () => {
   };
 
   return (
-    <div className = 'search'>
-      <div className='search-header'>
-        <div className='search-headline-container'>
+    <div className='search'>
+      <div className='header'>
+        <div className='headline-container'>
           <div className='logo-container'>
             <img
               src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
@@ -224,13 +224,14 @@ const Search = () => {
             />
           </div>
 
-          <h1 className='search-headline'>Image Archive</h1>
+          <h1 className='headline'>Image Archive</h1>
         </div>
-        <div className='back-btn-container'>
-          <Link to='/apod/today' className='back-btn'>
-            <Button variant='info'>Back to Picture of the Day</Button>
-          </Link>
-        </div>
+
+        <Link to='/apod/today' className='header-btn-container'>
+          <Button variant='info' size='sm'>
+            Back to Picture of the Day
+          </Button>
+        </Link>
       </div>
 
       <Form onSubmit={handleSubmit} className='search-bar'>

@@ -1,18 +1,16 @@
-
-.search{
+.search {
   margin: auto;
   width: 95%;
 }
 
-
-.search-header {
+/* .search-header {
   background-image: url('../images/galaxy.jpg');
   border: 1px solid white;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 50px;
   padding-bottom: 50px;
-  /* position: relative;  */
+
 
   display: flex;
   justify-content: space-between;
@@ -35,7 +33,7 @@
   display: block;
   margin: auto;
   height: 100%;
-}
+} */
 
 .search-bar {
   margin: 40px auto;
@@ -207,7 +205,7 @@
 
 /* Mobile */
 @media (max-width: 600px) {
-  .search-header {
+  /* .search-header {
     padding-top: 25px;
     padding-bottom: 25px;
     justify-content: center;
@@ -224,7 +222,6 @@
 
   .nasa-logo {
     margin: auto;
-    /* width: 75px; */
   }
 
   .search-headline {
@@ -236,9 +233,9 @@
     margin-bottom: 20px;
     order: 1;
   }
-
+*/
   .search-bar {
-    width: 90%;
+    width: 100%;
   }
 
   .grid-container {

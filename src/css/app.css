@@ -1,6 +1,68 @@
 /* Global App Styles */
 
 .app {
-   margin:10px auto;
-   max-width:1600px;
+  margin: 10px auto;
+  max-width: 1600px;
+}
+
+.header {
+  background-image: url('../images/galaxy.jpg');
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headline-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.headline {
+  font-size: clamp(30px, 5vw, 64px);
+  margin: 0;
+}
+
+.nasa-logo {
+  display: block;
+  margin: auto;
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    justify-content: center;
+    flex-flow: row wrap;
+  }
+
+  .headline-container {
+    order: 2;
+  }
+
+  .logo-container {
+    width: 100%;
+  }
+
+  .nasa-logo {
+    margin: auto;
+    /* width: 75px; */
+  }
+
+  .headline {
+    text-align: center;
+    width: 100%;
+  }
+  .header-btn-container {
+    margin-bottom: 20px;
+    order: 1;
+  }
 }

@@ -99,15 +99,20 @@ const Apod = () => {
 
   return (
     <div className='apod'>
-      <div className='apod-header'>
-        <h1 className='apod-headline'>
-          <img
-            src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
-            alt='NASA logo'
-          />
-          Astronomy Picture of the Day
-        </h1>
-        <Link to='/search' className='search-btn-container'>
+      <div className='header'>
+        <div className='headline-container'>
+          <div className='logo-container'>
+            <img
+              src='https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg'
+              alt='NASA logo'
+              className='nasa-logo'
+            />
+          </div>
+          <h1 className='headline'>
+            Astronomy Picture <br></br>of the Day
+          </h1>
+        </div>
+        <Link to='/search' className='header-btn-container'>
           <Button variant='info' className='search-btn' size='sm'>
             Search the full NASA Image Library
           </Button>
