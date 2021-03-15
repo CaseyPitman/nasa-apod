@@ -213,7 +213,7 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <div className = 'search'>
       <div className='search-header'>
         <div className='search-headline-container'>
           <div className='logo-container'>
