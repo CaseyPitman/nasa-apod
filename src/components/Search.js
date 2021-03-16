@@ -1,6 +1,6 @@
 // This component will allow users to search the NASA image library.
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import dayjs from 'dayjs';
@@ -21,6 +21,9 @@ import '../css/search.css';
 Modal.setAppElement(`#root`);
 
 const Search = () => {
+  //Ref for scroll to top of Display on pagination click
+  const myRef = useRef(null);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [searchPage, setSearchPage] = useState(1);
   const [nextPage, setNextPage] = useState(0);
@@ -85,6 +88,8 @@ const Search = () => {
       `/search/${searchTerm}/page=${dir === 'next' ? nextPage : prevPage}`
     );
 
+    executeScroll();
+
     setSearchPage(dir === 'next' ? nextPage : prevPage);
     const newNextPage = dir === 'next' ? nextPage + 1 : nextPage - 1;
     const newPrevPage = dir === 'next' ? prevPage + 1 : prevPage - 1;
@@ -118,6 +123,11 @@ const Search = () => {
 
   //TODO: modal styles
   //FIXME: bottom pagination buttons need to scroll to page top.
+
+  //Scrolls to top of Display on list page navigation
+  const executeScroll = () => {
+    myRef.current.scrollIntoView();
+  };
 
   const renderResults = () => {
     if (searchResults.length === 0) {
@@ -213,7 +223,7 @@ const Search = () => {
   };
 
   return (
-    <div className='search'>
+    <div className='search' ref={myRef}>
       <div className='header'>
         <div className='headline-container'>
           <div className='logo-container'>
