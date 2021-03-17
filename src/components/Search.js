@@ -128,7 +128,9 @@ const Search = () => {
     //Search returns zero results
     if (totalHits < 1) {
       return (
-        <Error msg='I have no record of the information you have requested.' />
+        <Error
+          msg={'I have no record of the information you have requested.'}
+        />
       );
     }
     const thumbnails = searchResults.items.map(image => {
