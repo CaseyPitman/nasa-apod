@@ -14,6 +14,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Pagination from 'react-bootstrap/Pagination';
 import PageItem from 'react-bootstrap/PageItem';
+import Error from './Error';
 
 //styles
 import '../css/search.css';
@@ -126,7 +127,9 @@ const Search = () => {
     }
     //Search returns zero results
     if (totalHits < 1) {
-      return <div>No result</div>;
+      return (
+        <Error msg='I have no record of the information you have requested.' />
+      );
     }
     const thumbnails = searchResults.items.map(image => {
       return (
@@ -146,7 +149,7 @@ const Search = () => {
         </button>
       );
     });
-    return thumbnails;
+    return <div className='search-results grid-container'>{thumbnails}</div>;
   };
 
   //MODAL FUNCS
@@ -258,7 +261,7 @@ const Search = () => {
         </InputGroup>
       </Form>
       {renderPagination()}
-      <div className='search-results grid-container'>{renderResults()}</div>
+      {renderResults()}
       {renderPagination()}
       <Modal
         isOpen={modalIsOpen}
