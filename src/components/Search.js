@@ -52,7 +52,6 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
-    console.log(result);
     setSearchResults(result);
     history.push(`/search/${searchTerm}/page=1`);
     setTotalHits(result.metadata.total_hits);
@@ -65,8 +64,6 @@ const Search = () => {
   };
 
   const changePage = async dir => {
-    console.log(`you wish to go to ${dir} page: ${nextPage}`);
-
     let goToPage = null;
     if (dir === 'next') {
       goToPage = nextPage;
@@ -82,7 +79,6 @@ const Search = () => {
       },
     };
     const result = await fetchSearch(query);
-    console.log(result);
     setSearchResults(result);
     history.push(
       `/search/${searchTerm}/page=${dir === 'next' ? nextPage : prevPage}`
@@ -95,8 +91,6 @@ const Search = () => {
     const newPrevPage = dir === 'next' ? prevPage + 1 : prevPage - 1;
     setNextPage(newNextPage);
     setPrevPage(newPrevPage);
-
-    console.log(searchPage);
   };
 
   const renderPagination = () => {
@@ -121,9 +115,6 @@ const Search = () => {
     );
   };
 
-  //TODO: modal styles
-  //FIXME: bottom pagination buttons need to scroll to page top.
-
   //Scrolls to top of Display on list page navigation
   const executeScroll = () => {
     myRef.current.scrollIntoView();
@@ -133,6 +124,7 @@ const Search = () => {
     if (searchResults.length === 0) {
       return <div></div>;
     }
+    //Search returns zero results
     if (totalHits < 1) {
       return <div>No result</div>;
     }
