@@ -1,7 +1,8 @@
+//This function fetches the astronomy picture of the day from NASA.
 
 
 import axios from 'axios';
-
+//API KEY
 const apiKey = process.env.REACT_APP_NASA_KEY;
 
 const fetchApod= async (query = {}) => {
