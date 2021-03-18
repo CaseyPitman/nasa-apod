@@ -1,8 +1,10 @@
-// Displays apod image for
-import React, { useState, useEffect } from 'react';
+// This component displays the astronomy picture of the day from NASA api
 
-//Componenets
+//Dependencies
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+//Components
 import DatePicker from 'react-datepicker';
 import Button from 'react-bootstrap/Button';
 
@@ -16,11 +18,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../css/apod.css';
 
 const Apod = () => {
+  //Store currently displayed date and returned data.
   const [startDate, setStartDate] = useState(new Date());
   const [apodData, setApodData] = useState({});
-
+  //Access history object
   const history = useHistory();
 
+  //Display today's APOD on load
   useEffect(() => {
     handleToday();
     const fetch = async () => {
@@ -31,7 +35,9 @@ const Apod = () => {
     fetch();
   }, []);
 
+  //Handle user selecting a date other than today's date.
   const handleSelectDate = async date => {
+    //Format the date for query.
     const formattedDate = format(new Date(date), 'yyyy-MM-dd');
     const queryDate = {
       params: {
@@ -39,43 +45,53 @@ const Apod = () => {
       },
     };
     const result = await fetchApod(queryDate);
+    //Update url based on selected date
     history.push(`/apod/${formattedDate}`);
     setApodData(result);
   };
 
+  //Handle user requesting random date APOD
   const handleRandom = async () => {
+    //Limit to ONE random pic (default is 10)
     const queryRandom = {
       params: {
         count: 1,
       },
     };
     const result = await fetchApod(queryRandom);
+    //Format date
     const formattedDate = format(new Date(result[0].date), 'yyyy-MM-dd');
-
+    //Update url to current date
     history.push(`/apod/${formattedDate}`);
     setStartDate(new Date(result[0].date));
     setApodData(result[0]);
   };
 
+  //Handle user requesting to return to current day's date.
   const handleToday = async () => {
     const result = await fetchApod();
     setStartDate(new Date());
+    //Update url to current date
     history.push(`/apod/today`);
     setApodData(result);
   };
 
+  //Format and display the date in human friendly terminology
   const displayDate = () => {
     if (!apodData) {
-      return 'date goes here';
+      return <div></div>;
     }
     const formattedDate = dayjs(apodData.date).format('MMMM DD, YYYY');
     return formattedDate;
   };
 
+  //Displays the image or video requested.
   const renderMedia = () => {
     if (!apodData) {
       return <div></div>;
-    } else if (apodData.media_type === 'video') {
+    }
+    //Render video
+    else if (apodData.media_type === 'video') {
       return (
         <div className='embed-responsive embed-responsive-16by9 media-video'>
           <iframe
@@ -88,14 +104,12 @@ const Apod = () => {
         </div>
       );
     } else {
-      //render image
+      //Render image
       return (
         <img src={apodData.url} alt={apodData.title} className='media-image' />
       );
     }
   };
-
-  // TODO: loading spinner for images.
 
   return (
     <div className='apod'>
