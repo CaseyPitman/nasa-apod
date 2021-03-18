@@ -68,7 +68,7 @@
 }
 
 .media-image {
-  border: solid 1px white;
+  /* border: solid 1px white; */
   display: inline-block;
   margin: auto;
   height: 100%;
