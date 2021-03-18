@@ -19,6 +19,7 @@ import Error from './Error';
 //styles
 import '../css/search.css';
 
+//Anchor modal
 Modal.setAppElement(`#root`);
 
 const Search = () => {
@@ -34,13 +35,15 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
-
+  //Access history object
   const history = useHistory();
 
+  //Update url when history updates (on search).
   useEffect(() => {
     history.push('/search/');
   }, [history]);
 
+  //User submits search request
   const handleSubmit = async e => {
     e.preventDefault();
     setSearchPage(1);
@@ -52,8 +55,10 @@ const Search = () => {
         page: 1,
       },
     };
+
     const result = await fetchSearch(query);
     setSearchResults(result);
+    //Update URL
     history.push(`/search/${searchTerm}/page=1`);
     setTotalHits(result.metadata.total_hits);
     setTotalPages(Math.ceil(result.metadata.total_hits / 100));
@@ -64,6 +69,7 @@ const Search = () => {
     }
   };
 
+  //Change page of search results
   const changePage = async dir => {
     let goToPage = null;
     if (dir === 'next') {
@@ -81,12 +87,13 @@ const Search = () => {
     };
     const result = await fetchSearch(query);
     setSearchResults(result);
+    //Update URL
     history.push(
       `/search/${searchTerm}/page=${dir === 'next' ? nextPage : prevPage}`
     );
-
+    //Scroll to top of page on page change
     executeScroll();
-
+    //Set cur, next, and previous page
     setSearchPage(dir === 'next' ? nextPage : prevPage);
     const newNextPage = dir === 'next' ? nextPage + 1 : nextPage - 1;
     const newPrevPage = dir === 'next' ? prevPage + 1 : prevPage - 1;
@@ -94,6 +101,7 @@ const Search = () => {
     setPrevPage(newPrevPage);
   };
 
+  //Render pagination controls
   const renderPagination = () => {
     if (totalPages === 0) {
       return <div></div>;
@@ -121,6 +129,7 @@ const Search = () => {
     myRef.current.scrollIntoView();
   };
 
+  //Render search results
   const renderResults = () => {
     if (searchResults.length === 0) {
       return <div></div>;
@@ -147,7 +156,6 @@ const Search = () => {
             alt={image.data[0].title}
             className='grid-item-thumbnail'
           />
-          {/* <p className='grid-item-title'>{image.data[0].title}</p> */}
         </button>
       );
     });
@@ -155,16 +163,19 @@ const Search = () => {
   };
 
   //MODAL FUNCS
+
   // Open modal
   const openModal = image => {
     setCurrentImage(image);
     setModalIsOpen(true);
   };
+
   // Close modal
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
+  //Render modal content
   const renderModalContent = () => {
     // No data present yet, render empty div.
     if (!currentImage.data) {
