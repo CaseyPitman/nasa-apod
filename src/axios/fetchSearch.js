@@ -1,4 +1,4 @@
-//This component handles get requests for the NASA image archive search.
+//This function handles get requests for the NASA image archive search.
 
 import axios from 'axios';
 
