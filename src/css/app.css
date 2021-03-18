@@ -32,10 +32,11 @@
 
 .nasa-logo {
   display: block;
-  margin: auto;
   height: 100%;
+  margin: auto;
 }
 
+/* Mobile */
 @media (max-width: 600px) {
   .header {
     padding-top: 25px;
@@ -54,7 +55,6 @@
 
   .nasa-logo {
     margin: auto;
-    /* width: 75px; */
   }
 
   .headline {
